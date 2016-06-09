@@ -9,11 +9,13 @@ app.get('/', function(req, res){
 
 // Add code to adjust public/static folders
 //
-app.use( express.static(__dirname + '/js'));
-
+//app.use( express.static(__dirname + '/js'));
+app.use(express.static(__dirname + '/js'));
+/*
 app.get('/js/client_world.js', function(req, res){
     res.sendFile(__dirname + '/js/client_world.js');
 });
+*/
 
 io.on('connection', function(socket){
     console.log('a user connected');
