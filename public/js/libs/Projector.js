@@ -126,7 +126,7 @@ THREE.Projector = function () {
 
 	_clippedVertex1PositionScreen = new THREE.Vector4(),
 	_clippedVertex2PositionScreen = new THREE.Vector4();
-	
+
 	//
 
 	this.projectVector = function ( vector, camera ) {
@@ -148,7 +148,7 @@ THREE.Projector = function () {
 		console.error( 'THREE.Projector: .pickingRay() has been removed.' );
 
 	};
-	
+
 	//
 
 	var RenderList = function () {

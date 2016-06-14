@@ -6,14 +6,14 @@ var world = require('./public/js/server_world');
 
 app.use(express.static(__dirname + '/public'));
 
-/*
 app.get('/', function(req, res){
+    res.sendFile(__dirname + '/webvr.html');
+});
+
+/*app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/', function(req, res){
-    res.sendFile(__dirname + '/WebVR.html');
-});*/
 
 // Add code to adjust public/static folders
 //
