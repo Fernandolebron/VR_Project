@@ -6,11 +6,11 @@ var world = require('./public/js/server_world');
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/', function(req, res){
+app.get('/webvr', function(req, res){
     res.sendFile(__dirname + '/webvr.html');
 });
 
-/*app.get('/', function(req, res){
+app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
 });
 
