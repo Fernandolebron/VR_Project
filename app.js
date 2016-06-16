@@ -6,6 +6,10 @@ var world = require('./public/js/server_world');
 
 app.use(express.static(__dirname + '/public'));
 
+app.get('/skysun', function(req, res){
+    res.sendFile(__dirname + '/skysun.html');
+});
+
 app.get('/webvr', function(req, res){
     res.sendFile(__dirname + '/webvr.html');
 });
