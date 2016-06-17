@@ -37,14 +37,44 @@
 
 		<script src="/js/Detector.js"></script>
 		<script src="/js/dat.gui.min.js"></script>
+		<script src="http://code.jquery.com/jquery-3.0.0.js"></script>
 
 
 		<script>
-//London Latitude: 51.50853, Longitude-0.12574 API: http://api.geonames.org/timezoneJSON
-	//	function LondonTime(){
+//London Latitude: 51.509, Longitude: -0.126 API: http://api.geonames.org/timezoneJSON
 
-	//	}
+ 	function LondonTime(){
+ 		
+    	var url = "https://maps.googleapis.com/maps/api/timezone/json?location=51.509,-0.126&timestamp=" + (Math.round((new Date().getTime()) / 1000)).toString() + "&sensor=false";
+    	$.ajax({
+      		url: url,
+    	}).done(function(response) {
+    		var d = new Date();
+    		var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+    		var nd = new Date(utc + (1000*response.rawOffset));
+      		alert("The time in London is " + nd.toLocaleString() +
+        ".");
+    	});
+	}
+	/*
 
+	function GetTime(latitude, longitude) {
+				$.ajax({
+			 		url: 'http://api.geonames.org/timezoneJSON',
+			  		data: {lat: latitude, lng: longitude, username: 'demo'},
+			 		async: false,
+			  		success: function(Response){
+						alert(Response.time + " in London");
+						tiempo = Response.time[11] + Response.time[12];
+						//alert(tiempo);
+			  	 
+					},
+					complete: function(){}
+				});
+			}
+			GetTime(51.509,-0.126);*/
+			LondonTime();
+		
 			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 			var container;
 			var camera, controls, scene, renderer;
