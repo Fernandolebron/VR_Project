@@ -13,8 +13,15 @@
 
     <style>
         body {
-            margin: 0px;
-            overflow: hidden;
+          color: #000;
+          font-family:Monospace;
+        	font-size:13px;
+          font-weight: bold;
+          background-color: #fff;
+          margin: 0px;
+          overflow: hidden;
+
+
         }
         canvas {
           position: fixed;
@@ -26,6 +33,16 @@
           right: 0;
           z-index: 1;
           background: white;
+        }
+        #info {
+          color:#ccc;
+          text-shadow: 1px 1px rgba(0,0,0,0.25);
+          position: absolute;
+          top: 0px; width: 100%;
+          padding: 5px;
+        }
+        a {
+          color: #fff;
         }
     </style>
 </head>
@@ -61,23 +78,114 @@
     <!-- A polyfill for the WebVR API.  -->
     <script src="/js/webvr-polyfill.js"></script>
 
+    <script src="/js/OrbitControls.js"></script>
+		<script src="/js/SkyShader.js"></script>
+
+		<script src="/js/Detector.js"></script>
+		<script src="/js/dat.gui.min.js"></script>
+
+    <div id="container"></div>
     <script>
+        // Reactions...
+        var socket = io();
+
+        socket.on('updatePosition', function(data){
+            updatePlayerPosition(data);
+        });
+        socket.on('connect', function(){
+            loadWorld();
+            socket.emit('requestOldPlayers', {});
+        });
+        socket.on('createPlayer', function(data){
+            createPlayer(data);
+        });
+        socket.on('addOtherPlayer', function(data){
+            addOtherPlayer(data);
+        });
+        socket.on('removeOtherPlayer', function(data){
+            removeOtherPlayer(data);
+        });
+
+    </script>
+
+
+    <script>
+
+      if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+      var sky, sunSphere;
+      var camera, controls, scene, renderer;
+
+
+      function initSky() {
+				// Add Sky Mesh
+				sky = new THREE.Sky();
+				scene.add( sky.mesh );
+
+				// Add Sun Helper
+				sunSphere = new THREE.Mesh(
+					new THREE.SphereBufferGeometry( 20000, 16, 8 ),
+					new THREE.MeshBasicMaterial( { color: 0xffffff } )
+				);
+
+				sunSphere.position.y = - 700000;
+				sunSphere.visible = false;
+				scene.add( sunSphere );
+
+				/// GUI
+				var effectController  = {
+					turbidity: 10,
+					reileigh: 2,
+					mieCoefficient: 0.005,
+					mieDirectionalG: 0.8,
+					luminance: 1,
+					inclination: 0.49, // elevation / inclination
+					azimuth: 0.25, // Facing front,
+					sun: ! true
+				};
+
+				var distance = 400000;
+				function guiChanged() {
+					var uniforms = sky.uniforms;
+					uniforms.turbidity.value = effectController.turbidity;
+					uniforms.reileigh.value = effectController.reileigh;
+					uniforms.luminance.value = effectController.luminance;
+					uniforms.mieCoefficient.value = effectController.mieCoefficient;
+					uniforms.mieDirectionalG.value = effectController.mieDirectionalG;
+					var theta = Math.PI * ( effectController.inclination - 0.5 );
+					var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
+					sunSphere.position.x = distance * Math.cos( phi );
+					sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
+					sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
+					sunSphere.visible = effectController.sun;
+					sky.uniforms.sunPosition.value.copy( sunSphere.position );
+					renderer.render( scene, camera );
+				}
+				//var gui = new dat.GUI();
+
+				guiChanged();
+			}
+
+      initSky();
+
     // Setup three.js WebGL renderer. Note: Antialiasing is a big performance hit.
     // Only enable it if you actually need to.
-    var renderer = new THREE.WebGLRenderer({antialias: false});
+     renderer = new THREE.WebGLRenderer({antialias: false});
     renderer.setPixelRatio(Math.floor(window.devicePixelRatio));
+
+    renderer.setSize( window.innerWidth, window.innerHeight );
 
     // Append the canvas element created by the renderer to document body element.
     document.body.appendChild(renderer.domElement);
 
     // Create a three.js scene.
-    var scene = new THREE.Scene();
+     scene = new THREE.Scene();
 
     // Create a three.js camera.
-    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
 
     // Apply VR headset positional data to camera.
-    var controls = new THREE.VRControls(camera);
+    controls = new THREE.VRControls(camera, renderer.domElement);
 
     // Apply VR stereo rendering to renderer.
     var effect = new THREE.VREffect(renderer);
@@ -187,29 +295,6 @@
 
     </script>
 
-<div id="container"></div>
-<script>
-    // Reactions...
-    var socket = io();
-
-    socket.on('updatePosition', function(data){
-        updatePlayerPosition(data);
-    });
-    socket.on('connect', function(){
-        loadWorld();
-        socket.emit('requestOldPlayers', {});
-    });
-    socket.on('createPlayer', function(data){
-        createPlayer(data);
-    });
-    socket.on('addOtherPlayer', function(data){
-        addOtherPlayer(data);
-    });
-    socket.on('removeOtherPlayer', function(data){
-        removeOtherPlayer(data);
-    });
-
-</script>
 
 
 

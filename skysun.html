@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>three.js webgl - shaders - sky sun shader</title>
+
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<title>three.js webgl - shaders - sky sun shader</title>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="//threejs.org/build/three.js"></script>
+
 		<style>
 			body {
 				color: #000;
@@ -26,6 +33,7 @@
 			a {
 				color: #fff;
 			}
+
 		</style>
 	</head>
 	<body>
@@ -38,7 +46,29 @@
 		<script src="/js/Detector.js"></script>
 		<script src="/js/dat.gui.min.js"></script>
 
+		<div id="container"></div>
+		<script>
+		    // Reactions...
+		    var socket = io();
 
+		    socket.on('updatePosition', function(data){
+		        updatePlayerPosition(data);
+		    });
+		    socket.on('connect', function(){
+		        loadWorld();
+		        socket.emit('requestOldPlayers', {});
+		    });
+		    socket.on('createPlayer', function(data){
+		        createPlayer(data);
+		    });
+		    socket.on('addOtherPlayer', function(data){
+		        addOtherPlayer(data);
+		    });
+		    socket.on('removeOtherPlayer', function(data){
+		        removeOtherPlayer(data);
+		    });
+
+		</script>
 		<script>
 //London Latitude: 51.50853, Longitude-0.12574 API: http://api.geonames.org/timezoneJSON
 	//	function LondonTime(){
@@ -97,7 +127,7 @@
 					renderer.render( scene, camera );
 				}
 				//var gui = new dat.GUI();
-		
+
 				guiChanged();
 			}
 			function init() {
@@ -129,6 +159,8 @@
 				renderer.render( scene, camera );
 			}
 		</script>
+
+
 
 	</body>
 
