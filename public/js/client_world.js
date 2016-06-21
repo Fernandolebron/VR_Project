@@ -1,6 +1,7 @@
 var container, scene, camera, renderer, raycaster, objects = [];
 var keyState = {};
 var sphere;
+var sky;
 
 var player, playerId, moveSpeed, turnSpeed;
 
@@ -13,6 +14,55 @@ var loadWorld = function(){
     init();
     animate();
 
+    function initSky() {
+      // Add Sky Mesh
+      sky = new THREE.Sky();
+      scene.add( sky.mesh );
+
+      // Add Sun Helper
+      sunSphere = new THREE.Mesh(
+        new THREE.SphereBufferGeometry( 20000, 16, 8 ),
+        new THREE.MeshBasicMaterial( { color: 0xffffff } )
+      );
+
+      sunSphere.position.y = - 700000;
+      sunSphere.visible = false;
+      scene.add( sunSphere );
+
+      /// GUI
+      var effectController  = {
+        turbidity: 10,
+        reileigh: 2,
+        mieCoefficient: 0.005,
+        mieDirectionalG: 0.8,
+        luminance: 1,
+        inclination: 0.49, // elevation / inclination
+        azimuth: 0.25, // Facing front,
+        sun: ! true
+      };
+
+      var distance = 400000;
+      function guiChanged() {
+        var uniforms = sky.uniforms;
+        uniforms.turbidity.value = effectController.turbidity;
+        uniforms.reileigh.value = effectController.reileigh;
+        uniforms.luminance.value = effectController.luminance;
+        uniforms.mieCoefficient.value = effectController.mieCoefficient;
+        uniforms.mieDirectionalG.value = effectController.mieDirectionalG;
+        var theta = Math.PI * ( effectController.inclination - 0.5 );
+        var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
+        sunSphere.position.x = distance * Math.cos( phi );
+        sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
+        sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
+        sunSphere.visible = effectController.sun;
+        sky.uniforms.sunPosition.value.copy( sunSphere.position );
+        renderer.render( scene, camera );
+      }
+      //var gui = new dat.GUI();
+
+      guiChanged();
+    }
+
     function init(){
 
         //Setup------------------------------------------
@@ -20,11 +70,12 @@ var loadWorld = function(){
 
         scene = new THREE.Scene();
 
-        camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
+        camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 50, 200000000);
         camera.position.z = 5;
         //camera.lookAt( new THREE.Vector3(0,0,0));
 
         renderer = new THREE.WebGLRenderer( { alpha: true} );
+        renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize( window.innerWidth, window.innerHeight);
 
         raycaster = new THREE.Raycaster();
@@ -37,7 +88,13 @@ var loadWorld = function(){
 
         scene.add( sphere );
         objects.push( sphere ); //if you are interested in detecting an intersection with this sphere
-
+        controls = new THREE.OrbitControls( camera, renderer.domElement );
+        controls.addEventListener( 'change', render );
+        //controls.maxPolarAngle = Math.PI / 2;
+        controls.enableZoom = false;
+        controls.enablePan = false;
+        initSky();
+        window.addEventListener( 'resize', onWindowResize, false );
         //Events------------------------------------------
         document.addEventListener('click', onMouseClick, false );
         document.addEventListener('mousedown', onMouseDown, false);
@@ -49,8 +106,8 @@ var loadWorld = function(){
         window.addEventListener( 'resize', onWindowResize, false );
 
         //Final touches-----------------------------------
-        container.appendChild( renderer.domElement );
-        document.body.appendChild( container );
+        //container.appendChild( );
+        document.body.appendChild( renderer.domElement  );
     }
 
     function animate(){

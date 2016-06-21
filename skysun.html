@@ -39,7 +39,11 @@
 	<body>
 
 		<script src="/js/three.js"></script>
+		<!-- VRControls.js applies the WebVR transformations to a three.js camera object. -->
+		<script src="/js/VRControls.js"></script>
 
+		<!-- VREffect.js handles stereo camera setup and rendering.  -->
+		<script src="/js/VREffect.js"></script>
 		<script src="/js/OrbitControls.js"></script>
 		<script src="/js/SkyShader.js"></script>
 
@@ -47,8 +51,13 @@
 		<script src="/js/dat.gui.min.js"></script>
 		<script src="http://code.jquery.com/jquery-3.0.0.js"></script>
 
+
+
 		<div id="container"></div>
 		<script>
+
+			// Apply VR headset positional data to camera.
+
 		    // Reactions...
 		    var socket = io();
 
@@ -74,7 +83,7 @@
 //London Latitude: 51.509, Longitude: -0.126 API: http://api.geonames.org/timezoneJSON
 
  	function LondonTime(){
- 		
+
     	var url = "https://maps.googleapis.com/maps/api/timezone/json?location=51.509,-0.126&timestamp=" + (Math.round((new Date().getTime()) / 1000)).toString() + "&sensor=false";
     	$.ajax({
       		url: url,
@@ -97,14 +106,14 @@
 						alert(Response.time + " in London");
 						tiempo = Response.time[11] + Response.time[12];
 						//alert(tiempo);
-			  	 
+
 					},
 					complete: function(){}
 				});
 			}
 			GetTime(51.509,-0.126);*/
 			LondonTime();
-		
+
 			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 			var container;
 			var camera, controls, scene, renderer;
@@ -115,8 +124,9 @@
 			function initSky() {
 				// Add Sky Mesh
 				sky = new THREE.Sky();
-				scene.add( sky.mesh );
 
+				scene.add( sky.mesh );
+					controls = new THREE.VRControls(camera);
 				// Add Sun Helper
 				sunSphere = new THREE.Mesh(
 					new THREE.SphereBufferGeometry( 20000, 16, 8 ),
@@ -164,6 +174,12 @@
 				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 100, 2000000 );
 				camera.position.set( 0, 100, 2000 );
 
+
+
+
+				// // Apply VR stereo rendering to renderer.
+				// var effect = new THREE.VREffect(renderer);
+				// effect.setSize(window.innerWidth, window.innerHeight);
 				//camera.setLens(20);
 				scene = new THREE.Scene();
 				renderer = new THREE.WebGLRenderer();
@@ -171,9 +187,10 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				document.body.appendChild( renderer.domElement );
 
+
 				controls = new THREE.OrbitControls( camera, renderer.domElement );
 				controls.addEventListener( 'change', render );
-				//controls.maxPolarAngle = Math.PI / 2;
+				controls.maxPolarAngle = Math.PI / 2;
 				controls.enableZoom = false;
 				controls.enablePan = false;
 				initSky();
@@ -186,7 +203,10 @@
 				render();
 			}
 			function render() {
+				// Update VR headset position and apply to camera.
+
 				renderer.render( scene, camera );
+
 			}
 		</script>
 
