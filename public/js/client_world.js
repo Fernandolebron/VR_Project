@@ -13,6 +13,7 @@ var loadWorld = function(){
 
     init();
     animate();
+    
 
     function initSky() {
       // Add Sky Mesh
@@ -70,8 +71,8 @@ var loadWorld = function(){
 
         scene = new THREE.Scene();
 
-        camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 50, 200000000);
-        camera.position.z = 5;
+        camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 20000000);
+        camera.position.set( 0, 100, 2000 );
         //camera.lookAt( new THREE.Vector3(0,0,0));
 
         renderer = new THREE.WebGLRenderer( { alpha: true} );
@@ -93,7 +94,10 @@ var loadWorld = function(){
         //controls.maxPolarAngle = Math.PI / 2;
         controls.enableZoom = false;
         controls.enablePan = false;
+
+        document.body.appendChild( renderer.domElement  );
         initSky();
+        
         window.addEventListener( 'resize', onWindowResize, false );
         //Events------------------------------------------
         document.addEventListener('click', onMouseClick, false );
@@ -107,7 +111,7 @@ var loadWorld = function(){
 
         //Final touches-----------------------------------
         //container.appendChild( );
-        document.body.appendChild( renderer.domElement  );
+
     }
 
     function animate(){
