@@ -73,7 +73,7 @@ var loadWorld = function(){
 
         camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 20000000);
         camera.position.set( 0, 100, 2000 );
-        //camera.lookAt( new THREE.Vector3(0,0,0));
+        camera.lookAt( new THREE.Vector3(0,0,0));
 
         renderer = new THREE.WebGLRenderer( { alpha: true} );
         renderer.setPixelRatio( window.devicePixelRatio );
@@ -107,7 +107,11 @@ var loadWorld = function(){
         document.addEventListener('mouseout', onMouseOut, false);
         document.addEventListener('keydown', onKeyDown, false );
         document.addEventListener('keyup', onKeyUp, false );
+        document.addEventListener('keyz', onKeyZ, false );
+        document.addEventListener('keyx', onKeyX, false );
+        document.addEventListener('keyc', onKeyC, false );        
         window.addEventListener( 'resize', onWindowResize, false );
+
 
         //Final touches-----------------------------------
         //container.appendChild( );
@@ -170,6 +174,31 @@ var loadWorld = function(){
         keyState[event.keyCode || event.which] = false;
 
     }
+
+    function onKeyZ( event ){
+
+        //event = event || window.event;
+        
+         keyState[event.keyCode || event.which] = true;
+    
+    }
+
+    function onKeyX( event ){
+
+        //event = event || window.event;
+
+         keyState[event.keyCode || event.which] = false;
+
+    }
+
+    function onKeyC( event ){
+
+        //event = event || window.event;
+
+         keyState[event.keyCode || event.which] = true;
+
+    }
+
     function onWindowResize() {
 
         camera.aspect = window.innerWidth / window.innerHeight;
@@ -304,8 +333,14 @@ var checkKeyStates = function(){
     }
 
     //camera move
-    if(keyState[86]){
-
+    if(keyState[90]){//z
+        camera.position.x *= 2; 
+    }
+    if(keyState[88]){//x
+        camera.position.y *= -2; 
+    }
+    if(keyState[67]){//c
+        camera.position.z *= 2; 
     }
 
 };
