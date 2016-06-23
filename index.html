@@ -84,21 +84,6 @@
     
       <script>
 
-      function LondonTime(){
-
-      var url = "https://maps.googleapis.com/maps/api/timezone/json?location=51.509,-0.126&timestamp=" + (Math.round((new Date().getTime()) / 1000)).toString() + "&sensor=false";
-      $.ajax({
-          url: url,
-      }).done(function(response) {
-        var d = new Date();
-        var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
-        var nd = new Date(utc + (1000*response.rawOffset));
-          alert("The time in London is " + nd.toLocaleString() +
-        ".");
-      });
-  }
-
-  LondonTime();
       // Setup three.js WebGL renderer. Note: Antialiasing is a big performance hit.
       // Only enable it if you actually need to.
       var renderer = new THREE.WebGLRenderer({antialias: false});

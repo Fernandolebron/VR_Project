@@ -2,6 +2,7 @@ var container, scene, camera, renderer, raycaster, objects = [];
 var keyState = {};
 var sphere;
 var sky;
+var d, nd;
 
 var player, playerId, moveSpeed, turnSpeed;
 
@@ -10,6 +11,23 @@ var playerData;
 var otherPlayers = [], otherPlayersId = [];
 
 var loadWorld = function(){
+
+
+    function LondonTime(){
+
+        var url = "https://maps.googleapis.com/maps/api/timezone/json?location=51.509,-0.126&timestamp=" + (Math.round((new Date().getTime()) / 1000)).toString() + "&sensor=false";
+        $.ajax({
+            url: url,
+        }).done(function(response) {
+            d = new Date();
+            var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+            nd = new Date(utc + (1000*response.rawOffset));
+            alert("The time in London is " + nd.toLocaleString() +
+        ".");
+        });
+    }
+
+    LondonTime();
 
     init();
     animate();
@@ -44,6 +62,8 @@ var loadWorld = function(){
 
       var distance = 400000;
       function guiChanged() {
+
+        if(d < nd){
         var uniforms = sky.uniforms;
         uniforms.turbidity.value = effectController.turbidity;
         uniforms.reileigh.value = effectController.reileigh;
@@ -57,8 +77,25 @@ var loadWorld = function(){
         sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
         sunSphere.visible = effectController.sun;
         sky.uniforms.sunPosition.value.copy( sunSphere.position );
-        renderer.render( scene, camera );
       }
+      else{
+        var uniforms = sky.uniforms;
+        uniforms.turbidity.value = 1;
+        uniforms.reileigh.value = 0;
+        uniforms.luminance.value = 1;
+        uniforms.mieCoefficient.value = 0.1;
+        uniforms.mieDirectionalG.value = 0;
+        var theta = Math.PI * ( effectController.inclination - 0.5 );
+        var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
+        sunSphere.position.x = distance * Math.cos( phi );
+        sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
+        sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
+        sunSphere.visible = effectController.sun;
+        sky.uniforms.sunPosition.value.copy( sunSphere.position );
+
+      }
+      renderer.render( scene, camera );
+  }
       //var gui = new dat.GUI();
 
       guiChanged();
