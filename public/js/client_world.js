@@ -134,6 +134,28 @@ var loadWorld = function(){
 
         document.body.appendChild( renderer.domElement  );
         initSky();
+
+        
+
+        var plane_geometry = new THREE.PlaneGeometry( 400,400 );
+        var plane_material = new THREE.MeshBasicMaterial( {color: 0xAA3939, side: THREE.DoubleSide} );
+        var plane = new THREE.Mesh( plane_geometry, plane_material );
+        plane.rotation.set(-Math.PI/2, Math.PI/2000, Math.PI);
+        scene.add( plane );
+        
+        // // Create 3D objects.
+        // var cubeg = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+        // var cubem = new THREE.MeshBasicMaterial({color: 0x29526D, side: THREE.DoubleSide);
+        // var cubes = new THREE.Mesh(cubeg, cubem);
+        // //cubes.rotation.set(-Math.PI/2, Math.PI/2000, Math.PI);
+        // // Position cube mesh
+        // cubes.position.z = -1;
+
+        // // Add cube mesh to your three.js scene
+        // scene.add(cubes);
+
+
+
         
         window.addEventListener( 'resize', onWindowResize, false );
         //Events------------------------------------------
