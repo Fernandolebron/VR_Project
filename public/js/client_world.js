@@ -32,6 +32,7 @@ var loadWorld = function(){
     init();
     animate();
     
+    
 
     function initSky() {
       // Add Sky Mesh
@@ -101,6 +102,68 @@ var loadWorld = function(){
       guiChanged();
     }
 
+    function planes(x,y,z){
+        var geo = new THREE.BoxGeometry(2,2,2);
+        var mat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DocubleSide});
+        var plan = new THREE.Mesh(geo, mat);
+        
+        plan.position.x= x;
+        plan.position.y = y;
+        plan.position.z =-z;
+        scene.add(plan); 
+    }
+
+    // function planes2(){
+    //     var geo = new THREE.BoxGeometry(2,2,2);
+    //     var mat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DocubleSide});
+    //     var plan = new THREE.Mesh(geo, mat);
+        
+    //     plan.position.x= 5;
+    //     plan.position.y = 0;
+    //     plan.position.z =-15;
+    //     scene.add(plan); 
+    // }
+    // function planes3(){
+    //     var geo = new THREE.BoxGeometry(2,2,2);
+    //     var mat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DocubleSide});
+    //     var plan = new THREE.Mesh(geo, mat);
+        
+    //     plan.position.x= 5;
+    //     plan.position.y = 0;
+    //     plan.position.z =-15;
+    //     scene.add(plan); 
+    // }
+    // function planes4(){
+    //     var geo = new THREE.BoxGeometry(2,2,2);
+    //     var mat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DocubleSide});
+    //     var plan = new THREE.Mesh(geo, mat);
+        
+    //     plan.position.x= 5;
+    //     plan.position.y = 0;
+    //     plan.position.z =-15;
+    //     scene.add(plan); 
+    // }
+    // function planes5(){
+    //     var geo = new THREE.BoxGeometry(2,2,2);
+    //     var mat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DocubleSide});
+    //     var plan = new THREE.Mesh(geo, mat);
+        
+    //     plan.position.x= 5;
+    //     plan.position.y = 0;
+    //     plan.position.z =-15;
+    //     scene.add(plan); 
+    // }
+    // function planes6(){
+    //     var geo = new THREE.BoxGeometry(2,2,2);
+    //     var mat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DocubleSide});
+    //     var plan = new THREE.Mesh(geo, mat);
+        
+    //     plan.position.x= 5;
+    //     plan.position.y = 0;
+    //     plan.position.z =-15;
+    //     scene.add(plan); 
+    // }
+
     function init(){
 
         //Setup------------------------------------------
@@ -134,29 +197,26 @@ var loadWorld = function(){
 
         document.body.appendChild( renderer.domElement  );
         initSky();
-
+        planes(5,0,15);
+        planes(-5,0,25);
+        planes(8,0,10);
+        planes(10,0,30);
+        planes(-8,0,22);
+        planes(-12,0,8);
+        planes(-2,0,20);
         
 
-        var plane_geometry = new THREE.PlaneGeometry( 400,400 );
+        var plane_geometry = new THREE.BoxGeometry( 400,400 );
         var plane_material = new THREE.MeshBasicMaterial( {color: 0xAA3939, side: THREE.DoubleSide} );
         var plane = new THREE.Mesh( plane_geometry, plane_material );
         plane.rotation.set(-Math.PI/2, Math.PI/2000, Math.PI);
+        plane.position.y= -2;
         scene.add( plane );
-        
-        // // Create 3D objects.
-        // var cubeg = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-        // var cubem = new THREE.MeshBasicMaterial({color: 0x29526D, side: THREE.DoubleSide);
-        // var cubes = new THREE.Mesh(cubeg, cubem);
-        // //cubes.rotation.set(-Math.PI/2, Math.PI/2000, Math.PI);
-        // // Position cube mesh
-        // cubes.position.z = -1;
-
-        // // Add cube mesh to your three.js scene
-        // scene.add(cubes);
-
-
 
         
+        
+               
+       
         window.addEventListener( 'resize', onWindowResize, false );
         //Events------------------------------------------
         document.addEventListener('click', onMouseClick, false );
@@ -194,6 +254,8 @@ var loadWorld = function(){
         //Render Scene---------------------------------------
         renderer.clear();
         renderer.render( scene , camera );
+
+              
     }
 
     function onMouseClick(){
