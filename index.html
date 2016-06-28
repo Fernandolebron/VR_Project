@@ -90,7 +90,7 @@
       renderer.setPixelRatio(Math.floor(window.devicePixelRatio));
 
       // Append the canvas element created by the renderer to document body element.
-      document.body.appendChild(renderer.domElement);
+      //document.body.appendChild(renderer.domElement);
 
       // Create a three.js scene.
      // var scene = new THREE.Scene();
@@ -98,8 +98,8 @@
       // Create a three.js camera.
       //var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
 
-      // Apply VR headset positional data to camera.
-      var controls = new THREE.VRControls(camera);
+      // // Apply VR headset positional data to camera.
+      // var controls = new THREE.VRControls(camera); 
 
              
       function animate(timestamp) {
@@ -108,9 +108,6 @@
 
         // Apply rotation to cube mesh
         cube.rotation.y += delta * 0.0006;
-
-        // Update VR headset position and apply to camera.
-        controls.update();
 
         // Render the scene.
         effect.render(scene, camera);
@@ -132,7 +129,7 @@
       }
 
       // Kick off animation loop.
-      requestAnimationFrame(animate);
+      //requestAnimationFrame(animate);
 
       // Resize the WebGL canvas when we resize and also when we change modes.
       window.addEventListener('resize', onResize);
@@ -163,7 +160,6 @@
 
       </script>
     
-
     <script>
 
         // Reactions...
@@ -187,9 +183,6 @@
         });
 
     </script>
-
-
-
 
 </body>
 </html>
