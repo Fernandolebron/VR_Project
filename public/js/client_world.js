@@ -12,7 +12,9 @@ var plan = [], planid = [];
 var loadWorld = function(){
 
 // Apply VR headset positional data to camera.
-var vrcontrols ;
+var controls ;
+var effect;
+ 
     function LondonTime(){
 
         var url = "https://maps.googleapis.com/maps/api/timezone/json?location=51.509,-0.126&timestamp=" + (Math.round((new Date().getTime()) / 1000)).toString() + "&sensor=false";
@@ -103,15 +105,18 @@ var vrcontrols ;
     }
 
     function planes(x,y,z){
-        var geo = new THREE.BoxGeometry(2,2,2);
-        var mat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DocubleSide});
-        var planx = new THREE.Mesh(geo, mat);
+        var geo = new THREE.CubeGeometry(2,2,2);
+        var mat = [
+            new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('/images/SDQ.jpg')})
+        ];
+        var planx = new THREE.Mesh( geo, new THREE.MeshBasicMaterial);
         
         planx.position.x= x;
         planx.position.y = y;
         planx.position.z =-z;
 
         plan.push(planx);
+        planid.push(planx);
         
 
         scene.add(planx); 
@@ -123,18 +128,24 @@ var vrcontrols ;
 
         //Setup------------------------------------------
         container = document.getElementById('container');
+            
+
+        renderer = new THREE.WebGLRenderer( { alpha: true} );
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize( window.innerWidth, window.innerHeight);
 
         scene = new THREE.Scene();
 
         camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 20000000);
         camera.position.set( 0, 100, 2000 );
         camera.lookAt( new THREE.Vector3(0,0,0));
-        // Apply VR headset positional data to camera.
-        vrcontrols = new THREE.VRControls(camera); 
 
-        renderer = new THREE.WebGLRenderer( { alpha: true} );
-        renderer.setPixelRatio( window.devicePixelRatio );
-        renderer.setSize( window.innerWidth, window.innerHeight);
+        // Apply VR headset positional data to camera.
+        controls = new THREE.VRControls(camera); 
+
+        // // // Apply VR stereo rendering to renderer.
+        effect = new THREE.VREffect(renderer);
+        effect.setSize(window.innerWidth, window.innerHeight);
 
         raycaster = new THREE.Raycaster();
         //Add Objects To the Scene HERE-------------------
@@ -146,7 +157,7 @@ var vrcontrols ;
         planes(10,0,30);
         planes(-8,0,22);
         planes(-12,0,8);
-        planes(-2,0,20);
+        
 
         //Sphere------------------
         var sphere_geometry = new THREE.SphereGeometry(1);
@@ -161,10 +172,9 @@ var vrcontrols ;
         controls.enableZoom = false;
         controls.enablePan = false;
 
-        document.body.appendChild( renderer.domElement  );
+        
         initSky();
 
-        
 
         var plane_geometry = new THREE.BoxGeometry( 400,400 );
         var plane_material = new THREE.MeshBasicMaterial( {color: 0xAA3939, side: THREE.DoubleSide} );
@@ -172,9 +182,11 @@ var vrcontrols ;
         plane.rotation.set(-Math.PI/2, Math.PI/2000, Math.PI);
         plane.position.y= -2;
         scene.add( plane );
-       
+
+        //window.addEventListener('vrdisplaypresentchange', onVRDisplayPresentChange);
         window.addEventListener( 'resize', onWindowResize, false );
         //Events------------------------------------------
+       
         document.addEventListener('click', onMouseClick, false );
         document.addEventListener('mousedown', onMouseDown, false);
         document.addEventListener('mouseup', onMouseUp, false);
@@ -184,22 +196,41 @@ var vrcontrols ;
         document.addEventListener('keyup', onKeyUp, false );
         document.addEventListener('keyz', onKeyZ, false );
         document.addEventListener('keyx', onKeyX, false );
-        document.addEventListener('keyc', onKeyC, false );        
-        window.addEventListener( 'resize', onWindowResize, false );
+        document.addEventListener('keyc', onKeyC, false );  
+        document.body.appendChild( renderer.domElement  );  
 
-
+       
         //Final touches-----------------------------------
         //container.appendChild( );
 
     }
+// Request animation frame loop function
 
-    function animate(){
+function animate() {
         requestAnimationFrame( animate );
+
         render();
+
+         // Update VR headset position and apply to camera.
+        controls.update();
+        // Render the scene.
+        effect.render(scene, camera);
+
         
-        // Update VR headset position and apply to camera.
-        vrcontrols.update();
     }
+
+function onResize() {
+  console.log('Resizing to %s x %s.', window.innerWidth, window.innerHeight);
+  effect.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+}
+
+function onVRDisplayPresentChange() {
+  console.log('onVRDisplayPresentChange');
+  onResize();
+}
+
     function render(){
 
         if ( player ){
@@ -209,14 +240,16 @@ var vrcontrols ;
             checkKeyStates();
 
             camera.lookAt( player.position );
+
         }
         //Render Scene---------------------------------------
         //making cubes rotation
         for (var i = 0; i < plan.length; i++) {
-            plan[i].rotation.y +=0.06;
+            plan[i].rotation.y +=0.02;
         };
         
 
+       
 
         renderer.clear();
         renderer.render( scene , camera );
@@ -312,6 +345,23 @@ var vrcontrols ;
 
 };
 
+//function for colition 
+ var colition = function(){
+     var c = Math.random()*0xffffff;
+  //  console.log("cOLOR: " + c);
+    var materialcolor = new THREE.Color(c);
+
+   // for (var i = 0; i < plan.length; i++) {
+        if ( plan.position.x === player.position.x) {
+            
+            plan = new THREE.Color(c);
+        };
+        
+   // };
+ 
+}
+
+//function that creates player
 var createPlayer = function(data){
 
     playerData = data;
