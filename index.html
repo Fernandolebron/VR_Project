@@ -71,12 +71,9 @@ document.addEventListener('touchmove', function(e) {
     <script src="/js/SkyShader.js"></script>
     <script src="/js/Detector.js"></script>
     <script src="/js/dat.gui.min.js"></script>
-<<<<<<< HEAD
-=======
-		<script src="/js/SkyShader.js"></script>
-    <script src="http://code.jquery.com/jquery-3.0.0.js"></script>
-    <script src="/js/vreticle.js"></script>
->>>>>>> 861de3c71ee12463e06a24dee9cc8bd257b070e3
+
+
+
 
 
 <script>
@@ -147,9 +144,9 @@ function animate(timestamp) {
 
 function onResize() {
   console.log('Resizing to %s x %s.', window.innerWidth, window.innerHeight);
-  veffect.setSize(window.innerWidth, window.innerHeight);
-  vcamera.aspect = window.innerWidth / window.innerHeight;
-  vcamera.updateProjectionMatrix();
+  effect.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
 }
 
 function onVRDisplayPresentChange() {
@@ -158,7 +155,7 @@ function onVRDisplayPresentChange() {
 }
 
 // Kick off animation loop.
-//requestAnimationFrame(animate);
+requestAnimationFrame(animate);
 
 // Resize the WebGL canvas when we resize and also when we change modes.
 window.addEventListener('resize', onResize);
@@ -187,8 +184,6 @@ function enterFullscreen (el) {
   }
 }
     
-    
-
  </script>
     
     <script>
