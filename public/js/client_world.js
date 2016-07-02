@@ -7,7 +7,7 @@ var player, playerId, moveSpeed, turnSpeed;
 var playerData;
 
 var otherPlayers = [], otherPlayersId = [];
-var plan = [], planid = [];
+var plan = [];
 
 var loadWorld = function(){
 
@@ -105,21 +105,14 @@ var effect;
     }
 
     function planes(x,y,z){
-        var geo = new THREE.CubeGeometry(2,2,2);
-        var mat = [
-            new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('/images/SDQ.jpg')})
-        ];
-        var planx = new THREE.Mesh( geo, new THREE.MeshBasicMaterial);
-        
-        planx.position.x= x;
-        planx.position.y = y;
-        planx.position.z =-z;
+       
+   
 
-        plan.push(planx);
-        planid.push(planx);
+        //plan.push(planx);
+        //planid.push(planx);
         
 
-        scene.add(planx); 
+        
     }
 
     
@@ -151,12 +144,85 @@ var effect;
         //Add Objects To the Scene HERE-------------------
 
         //Cubes position in the plane
-        planes(5,0,15);
-        planes(-5,0,25);
-        planes(8,0,10);
-        planes(10,0,30);
-        planes(-8,0,22);
-        planes(-12,0,8);
+        // planes(4,0.5,-15);
+        // planes(2,0.5,-15);
+        // planes(0,0.5,-15);
+        // planes(-2,0.5,-15);
+        // planes(-4,0.5,-15);
+        // planes(-6,0.5,-15);
+
+             var geo = new THREE.CubeGeometry(3,3,3,3,3,3);
+        var mat = new THREE.MeshNormalMaterial();
+        var load = new THREE.TextureLoader();
+
+        var Mat1 = [];
+        var Mat2 = [];
+        var Mat3 = [];
+        var Mat4 = [];
+        var Mat5 = [];
+        var Mat6 = [];
+
+        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+
+        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+
+        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+         
+        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+
+        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
+         
+        plan[0] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat1));
+        plan[1] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat2));
+        plan[2] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat3));
+        plan[3] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat4));
+        plan[4] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat5));
+        plan[5] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat6));
+
+       // var planx = new THREE.Mesh( geo, new THREE.MeshBasicMaterial);
+        for (var i = 0; i < 6; i++) {
+            plan[i].position.z = -20;
+            plan[i].position.y = 0.5;
+            plan[i].position.x= i * 8;
+            
+            
+            
+
+            scene.add(plan[i]); 
+        };
+
         
 //-----------------------------------------------------------------------
         //create gaze interaction manager
@@ -209,7 +275,7 @@ var effect;
         plane.position.y= -2;
         scene.add( plane );
 
-        //window.addEventListener('vrdisplaypresentchange', onVRDisplayPresentChange);
+        window.addEventListener('vrdisplaypresentchange', onVRDisplayPresentChange);
         window.addEventListener( 'resize', onWindowResize, false );
         //Events------------------------------------------
        
@@ -233,7 +299,7 @@ var effect;
 // Request animation frame loop function
 
 function animate() {
-        requestAnimationFrame( animate );
+        
 
         render();
 
@@ -242,7 +308,7 @@ function animate() {
         // Render the scene.
         effect.render(scene, camera);
 
-        
+        requestAnimationFrame( animate );
     }
 
 function onResize() {
@@ -270,13 +336,10 @@ function onVRDisplayPresentChange() {
         }
         //Render Scene---------------------------------------
         //making cubes rotation
-        for (var i = 0; i < plan.length; i++) {
-            plan[i].rotation.y +=0.02;
+        for (var j = 0; j < 6; j++) {
+            plan[j].rotation.y +=0.02;
         };
         
-
-       
-
         renderer.clear();
         renderer.render( scene , camera );
 

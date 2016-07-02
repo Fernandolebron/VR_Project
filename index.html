@@ -7,12 +7,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title></title>
-  <!-- three.js library -->
-      <script src="/socket.io/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="//threejs.org/build/three.js"></script>
     <script src="http://code.jquery.com/jquery-3.0.0.js"></script>
-    <script src="/js/client_world.js"></script>
-
+   
+  <!-- three.js library -->
+      
 <style>
 html, body {
   width: 100%;
@@ -60,49 +60,27 @@ document.addEventListener('touchmove', function(e) {
 
 </script>
 
+    <!-- three.js library -->
     <script src="/js/three.js"></script>
+
     <!-- VRControls.js applies the WebVR transformations to a three.js camera object. -->
     <script src="/js/VRControls.js"></script>
+
     <!-- VREffect.js handles stereo camera setup and rendering.  -->
     <script src="/js/VREffect.js"></script>
+
     <!-- A polyfill for the WebVR API.  -->
     <script src="/js/webvr-polyfill.js"></script>
+
+    <!-- Here Scripts -->
     <script src="/js/OrbitControls.js"></script>
     <script src="/js/SkyShader.js"></script>
-    <script src="/js/Detector.js"></script>
+     <script src="/js/Detector.js"></script>
     <script src="/js/dat.gui.min.js"></script>
-
-
-
-
+    <script src="/js/client_world.js"></script>
 
 <script>
-// Setup three.js WebGL renderer. Note: Antialiasing is a big performance hit.
-// Only enable it if you actually need to.
-//var vrenderer = new THREE.WebGLRenderer({antialias: false});
-//vrenderer.setPixelRatio(Math.floor(window.devicePixelRatio));
 
-// Append the canvas element created by the renderer to document body element.
-//document.body.appendChild(vrenderer.domElement);
-
-// Create a three.js scene.
-//var scene = new THREE.Scene();
-
-// Create a three.js camera.
-//var vcamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
-
-// Apply VR headset positional data to camera.
-//var controls = new THREE.VRControls(camera);
-
-// Apply VR stereo rendering to renderer.
-// var veffect = new THREE.VREffect(vrenderer);
-// veffect.setSize(window.innerWidth, window.innerHeight);
-
-
-// Add a repeating grid as a skybox.
-// var boxWidth = 5;
-// var loader = new THREE.TextureLoader();
-// loader.load('/images/box.png', onTextureLoaded);
 
 // Get the VRDisplay and save it for later.
 var vrDisplay = null;
@@ -112,31 +90,13 @@ navigator.getVRDisplays().then(function(displays) {
   }
 });
 
-// // Create 3D objects.
-// var geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-// var material = new THREE.MeshNormalMaterial();
-// var cube = new THREE.Mesh(geometry, material);
 
-// // Position cube mesh
-// cube.position.z = -1;
-
-// // Add cube mesh to your three.js scene
-// scene.add(cube);
 
 // Request animation frame loop function
 var lastRender = 0;
 function animate(timestamp) {
   var delta = Math.min(timestamp - lastRender, 500);
   lastRender = timestamp;
-
-//   // Apply rotation to cube mesh
-//   //cube.rotation.y += delta * 0.0006;
-
-//   // Update VR headset position and apply to camera.
-//   //vcontrols.update();
-
-//   // Render the scene.
-//   //veffect.render(scene, camera);
 
 //   // Keep looping.
  requestAnimationFrame(animate);
