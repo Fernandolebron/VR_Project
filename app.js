@@ -57,6 +57,9 @@ io.on('connection', function(socket){
         io.emit('removeOtherPlayer', player);
         world.removePlayer( player );
     });
+    socket.on('seeObject', function(){
+        console.log('Esta viendo el cubo');
+    });
 
 });
 

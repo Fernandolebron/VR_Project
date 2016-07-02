@@ -34,7 +34,27 @@ var effect;
     init();
     animate();
     
+    //create gaze interaction manager
+    var reticle = vreticle.Reticle(camera);
+    scene.add(camera);
     
+    var cube = new THREE.Mesh(geometry, material);
+
+    cube.ongazelong = function(){
+        this.material = reticle.get_random_hex_material();
+    }
+
+    cube.ongazeover = function(){
+        this.material = reticle.get_random_hex_material();
+    }
+
+    cube.ongazeout = function(){
+        this.material = reticle.default_material();
+    }
+
+    reticle.add_collider(cube);
+
+    reticle.reticle_loop();
 
     function initSky() {
       // Add Sky Mesh
