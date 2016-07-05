@@ -14,10 +14,30 @@ var loadWorld = function(){
 // Apply VR headset positional data to camera.
 var controls ;
 var effect;
- 
-    function LondonTime(){
 
-        var url = "https://maps.googleapis.com/maps/api/timezone/json?location=51.509,-0.126&timestamp=" + (Math.round((new Date().getTime()) / 1000)).toString() + "&sensor=false";
+/*coordinates
+  London
+  lat: 51.509, long: -0.126
+
+  Santo Domingo
+  lat: 18.500, long: -69.988
+
+  Tokyo
+  lat: 35.689, long: 139.691
+
+  Paris
+  lat: 48.856, long: 2.352
+
+  Turquia
+  lat: 38.962, long: 35.241
+  
+  Nueva York
+  lat: 40.712, long: -74.005
+  */  
+
+  function TheWorldTime(latitude, longitude){
+
+        var url = "https://maps.googleapis.com/maps/api/timezone/json?location="+latitude+","+longitude+"&timestamp=" + (Math.round((new Date().getTime()) / 1000)).toString() + "&sensor=false";
         $.ajax({
             url: url,
         }).done(function(response) {
@@ -29,7 +49,8 @@ var effect;
         });
     }
 
-    LondonTime();
+  
+    TheWorldTime(51.509, -0.126);
 
     init();
     animate();
