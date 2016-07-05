@@ -217,38 +217,97 @@ var effect;
             plan[i].position.y = 0.5;
             plan[i].position.x= i * 8;
             
-            
-            
+            //reticle.add_collider(plan[i]);
 
             scene.add(plan[i]); 
         };
 
         
-//-----------------------------------------------------------------------
         //create gaze interaction manager
-        // var reticle = vreticle.Reticle(camera);
-        // scene.add(camera);
+         var reticle = vreticle.Reticle(camera);
+         scene.add(camera);
         
-        // var cube = new THREE.Mesh(geometry, material);
+         var geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+         var material = new THREE.MeshNormalMaterial();
+         var cube = new THREE.Mesh(geometry, material);
+         reticle.add_collider(cube);
 
-        // cube.ongazelong = function(){
-        //     this.material = reticle.get_random_hex_material();
-        // }
+         plan[0].ongazelong = function(){
+             this.material = reticle.get_random_hex_material();
+         }
 
-        // cube.ongazeover = function(){
-        //     this.material = reticle.get_random_hex_material();
-        // }
+         plan[0].ongazeover = function(){
+             this.material = reticle.get_random_hex_material();
+         }
 
-        // cube.ongazeout = function(){
-        //     this.material = reticle.default_material();
-        // }
+         plan[0].ongazeout = function(){
+             this.material = reticle.default_material();
+         }
 
-        // reticle.add_collider(cube);
+         plan[1].ongazelong = function(){
+             this.material = reticle.get_random_hex_material();
+         }
 
-        // reticle.reticle_loop();
+         plan[1].ongazeover = function(){
+             this.material = reticle.get_random_hex_material();
+         }
 
+         plan[1].ongazeout = function(){
+             this.material = reticle.default_material();
+         }
 
-//-----------------------------------------------------------------------
+         plan[2].ongazelong = function(){
+             this.material = reticle.get_random_hex_material();
+         }
+
+         plan[2].ongazeover = function(){
+             this.material = reticle.get_random_hex_material();
+         }
+
+         plan[2].ongazeout = function(){
+             this.material = reticle.default_material();
+         }
+
+         plan[3].ongazelong = function(){
+             this.material = reticle.get_random_hex_material();
+         }
+
+         plan[3].ongazeover = function(){
+             this.material = reticle.get_random_hex_material();
+         }
+
+         plan[3].ongazeout = function(){
+             this.material = reticle.default_material();
+         }
+
+         plan[4].ongazelong = function(){
+             this.material = reticle.get_random_hex_material();
+         }
+
+         plan[4].ongazeover = function(){
+             this.material = reticle.get_random_hex_material();
+         }
+
+         plan[4].ongazeout = function(){
+             this.material = reticle.default_material();
+         }
+
+         plan[5].ongazelong = function(){
+             this.material = reticle.get_random_hex_material();
+         }
+
+         plan[5].ongazeover = function(){
+             this.material = reticle.get_random_hex_material();
+         }
+
+         plan[5].ongazeout = function(){
+             this.material = reticle.default_material();
+         }
+
+         
+
+         reticle.reticle_loop();
+
 
 
         //Sphere------------------
