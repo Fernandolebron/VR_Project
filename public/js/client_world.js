@@ -1,20 +1,330 @@
-var container, scene, camera, renderer, raycaster, objects = [];
+//Declaración de Variables
+var container, raycaster, objects = [];
 var keyState = {};
-var sphere;
-var sky;
 var d, nd;
 var player, playerId, moveSpeed, turnSpeed;
 var playerData;
-
+var sky, scene, renderer, camera, effect, sphere, reticle;
 var otherPlayers = [], otherPlayersId = [];
-var plan = [];
+var plan=[];
+// Apply VR headset positional data to camera.
+var time = new Date();
+var time2= 0; 
 
 var loadWorld = function(){
 
-// Apply VR headset positional data to camera.
-var controls ;
-var effect;
+      // Setup three.js WebGL renderer. Note: Antialiasing is a big performance hit.
+    // Only enable it if you actually need to.
+    renderer = new THREE.WebGLRenderer({antialias: false});
+    renderer.setPixelRatio(Math.floor(window.devicePixelRatio));
 
+    // Append the canvas element created by the renderer to document body element.
+    document.body.appendChild(renderer.domElement);
+
+    // Create a three.js scene.
+    scene = new THREE.Scene();
+
+    // Create a three.js camera.
+    camera = new THREE.PerspectiveCamera(120, window.innerWidth / window.innerHeight, 0.1, 20000000);
+    camera.position.set( 5, 200, 2000 );
+    camera.lookAt( new THREE.Vector3(0,0,0));
+    // Apply VR headset positional data to camera.
+    controls = new THREE.VRControls(camera);
+
+    // Apply VR stereo rendering to renderer.
+    effect = new THREE.VREffect(renderer);
+    effect.setSize(window.innerWidth, window.innerHeight);
+
+    reticle = vreticle.Reticle(camera);
+    scene.add(camera);
+        
+    //raycaster = new THREE.Raycaster();
+       
+
+    // // Add a repeating grid as a skybox.
+    // var boxWidth = 5;
+    // 
+    // loader.load('/images/box.png', onTextureLoaded);
+
+    initSky();
+
+    ///------------Añadiendo el piso--------------///
+        var plane_geometry = new THREE.BoxGeometry( 400,400 );
+        var plane_material = new THREE.MeshBasicMaterial( {color: 0xAA3939, side: THREE.DoubleSide} );
+        var plane = new THREE.Mesh( plane_geometry, plane_material );
+        plane.rotation.set(-Math.PI/2, Math.PI/2000, Math.PI);
+        plane.position.y= -2;
+        scene.add( plane );
+
+        
+    ///-------------------------------------------///
+
+    ///-------------------------------------------///
+    
+    ///-----------Añadiendo Paises ---------------///
+       //Cubes position in the plane
+        
+        var geo = new THREE.CubeGeometry(4,4,4,4,4,4);
+        var mat = new THREE.MeshNormalMaterial();
+        var load = new THREE.TextureLoader();
+
+        var Mat1 = [];
+        var Mat2 = [];
+        var Mat3 = [];
+        var Mat4 = [];
+        var Mat5 = [];
+        var Mat6 = [];
+
+        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/Paris/paris.png')} ));
+        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/Paris/londres.png')} ));
+        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/Paris/paris2.png')} ));
+        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/Paris/paris45.jpg')} ));
+        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/paris/paris6.jpg')} ));
+        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/Paris/paris3.jpg')} ));
+
+        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/tokio/1.jpg')} ));
+        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/tokio/2.jpg')} ));
+        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/tokio/jp.png')} ));
+        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/tokio/3.jpg')} ));
+        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/tokio/4.jpg')} ));
+        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/tokio/5.jpg')} ));
+
+        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/turquia/1.jpg')} ));
+        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/turquia/2.jpg')} ));
+        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/turquia/turquia.png')} ));
+        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/turquia/3.jpg')} ));
+        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/turquia/4.jpg')} ));
+        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/turquia/5.jpg')} ));
+         
+        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/Dominicana/1.jpg')} ));
+        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/Dominicana/2.jpg')} ));
+        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/Dominicana/3.jpg')} ));
+        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/Dominicana/4.jpg')} ));
+        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/Dominicana/5.jpg')} ));
+        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/Dominicana/6.jpg')} ));
+
+        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/ny/1.jpg')} ));
+        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/ny/2.jpg')} ));
+        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/ny/3.jpg')} ));
+        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/ny/4.jpg')} ));
+        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/ny/5.jpg')} ));
+        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/ny/6.jpg')} ));
+
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/3.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/2.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/1.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/4.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/5.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/6.jpg')} ));
+         
+        plan[0] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat1));
+        plan[1] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat2));
+        plan[2] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat3));
+        plan[3] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat4));
+        plan[4] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat5));
+        plan[5] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat6));
+
+      
+
+        //create gaze interaction manager
+         //var reticle = vreticle.Reticle(camera);
+         
+         
+         plan[0].ongazelong = function(){
+            socket.emit('lookat', 'Paris');
+             //this.material = reticle.get_random_hex_material();
+         }
+
+         plan[0].ongazeover = function(){
+             socket.emit('lookat', 'Paris');
+             //this.material = reticle.get_random_hex_material();
+         }
+
+         plan[0].ongazeout = function(){
+            socket.emit('lookat', 'Paris');
+            // this.material = reticle.default_material();
+         }
+
+          plan[1].ongazelong = function(){
+            socket.emit('lookat', 'Tokio');
+             //this.material = reticle.get_random_hex_material();
+         }
+
+         plan[1].ongazeover = function(){
+             socket.emit('lookat', 'Tokio');
+             //this.material = reticle.get_random_hex_material();
+         }
+
+         plan[1].ongazeout = function(){
+            socket.emit('lookat', 'Tokio');
+            // this.material = reticle.default_material();
+         }
+
+         plan[2].ongazelong = function(){
+            socket.emit('lookat', 'Turquia');
+             //this.material = reticle.get_random_hex_material();
+         }
+
+         plan[2].ongazeover = function(){
+             socket.emit('lookat', 'Turquia');
+             //this.material = reticle.get_random_hex_material();
+         }
+
+         plan[2].ongazeout = function(){
+            socket.emit('lookat', 'Turquia');
+            // this.material = reticle.default_material();
+         }
+
+          plan[3].ongazelong = function(){
+            socket.emit('lookat', 'Republica Dominicana');
+             //this.material = reticle.get_random_hex_material();
+         }
+
+         plan[3].ongazeover = function(){
+             socket.emit('lookat', 'Republica Dominicana');
+             //this.material = reticle.get_random_hex_material();
+         }
+
+         plan[3].ongazeout = function(){
+            socket.emit('lookat', 'Republica Dominicana');
+            // this.material = reticle.default_material();
+         }
+
+          plan[4].ongazelong = function(){
+            socket.emit('lookat', 'New York');
+             //this.material = reticle.get_random_hex_material();
+         }
+
+         plan[4].ongazeover = function(){
+             socket.emit('lookat', 'New York');
+             //this.material = reticle.get_random_hex_material();
+         }
+
+         plan[4].ongazeout = function(){
+            socket.emit('lookat', 'New York');
+            // this.material = reticle.default_material();
+         }
+
+          plan[5].ongazelong = function(){
+            socket.emit('lookat', 'Argentina');
+             //this.material = reticle.get_random_hex_material();
+         }
+
+         plan[5].ongazeover = function(){
+             socket.emit('lookat', 'Argentina');
+             //this.material = reticle.get_random_hex_material();
+         }
+
+         plan[5].ongazeout = function(){
+            socket.emit('lookat', 'Argentina');
+            // this.material = reticle.default_material();
+         }
+
+         // var planx = new THREE.Mesh( geo, new THREE.MeshBasicMaterial);
+        for (var i = 0; i < 6; i++) {
+
+          reticle.add_collider(plan[i])
+
+            plan[i].position.z = -20;
+            plan[i].position.y = 0.5;
+            plan[i].position.x= (i * 8)+ (i +2);
+            
+            //reticle.add_collider(plan[i]);
+
+            scene.add(plan[i]); 
+        };
+
+         //reticle.reticle_loop();
+
+    // Get the VRDisplay and save it for later.
+    var vrDisplay = null;
+    navigator.getVRDisplays().then(function(displays) {
+      if (displays.length > 0) {
+        vrDisplay = displays[0];
+      }
+    });
+
+        // Request animation frame loop function
+    var lastRender = 0;
+    function animate(timestamp) {
+      var delta = Math.min(timestamp - lastRender, 500);
+      lastRender = timestamp;
+
+       //making cubes rotation
+        for (var j = 0; j < 6; j++) {
+            plan[j].rotation.y +=0.002;
+        };
+
+      // Update VR headset position and apply to camera.
+      controls.update();
+
+      // Render the scene.
+      effect.render(scene, camera);
+
+      reticle.reticle_loop();
+
+      // Keep looping.
+      requestAnimationFrame(animate);
+    }
+
+    function onResize() {
+      console.log('Resizing to %s x %s.', window.innerWidth, window.innerHeight);
+      effect.setSize(window.innerWidth, window.innerHeight);
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+    }
+
+    function onVRDisplayPresentChange() {
+      console.log('onVRDisplayPresentChange');
+      onResize();
+    }
+
+    // Kick off animation loop.
+    requestAnimationFrame(animate);
+
+    // Resize the WebGL canvas when we resize and also when we change modes.
+    window.addEventListener('resize', onResize);
+    window.addEventListener('vrdisplaypresentchange', onVRDisplayPresentChange);
+
+    // Button click handlers.
+    document.querySelector('button#fullscreen').addEventListener('click', function() {
+      enterFullscreen(renderer.domElement);
+    });
+    document.querySelector('button#vr').addEventListener('click', function() {
+      vrDisplay.requestPresent([{source: renderer.domElement}]);
+    });
+    document.querySelector('button#reset').addEventListener('click', function() {
+      vrDisplay.resetPose();
+    });
+
+    //---------------------More Documents---------------------//
+        document.addEventListener('click', onMouseClick, false );
+        document.addEventListener('mousedown', onMouseDown, false);
+        document.addEventListener('mouseup', onMouseUp, false);
+        document.addEventListener('mousemove', onMouseMove, false);
+        document.addEventListener('mouseout', onMouseOut, false);
+        document.addEventListener('keydown', onKeyDown, false );
+        document.addEventListener('keyup', onKeyUp, false );
+        document.addEventListener('keyz', onKeyZ, false );
+        document.addEventListener('keyx', onKeyX, false );
+        document.addEventListener('keyc', onKeyC, false );  
+        //document.body.appendChild( renderer.domElement  ); 
+    //-------------------------------------------------------//
+
+    function enterFullscreen (el) {
+      if (el.requestFullscreen) {
+        el.requestFullscreen();
+      } else if (el.mozRequestFullScreen) {
+        el.mozRequestFullScreen();
+      } else if (el.webkitRequestFullscreen) {
+        el.webkitRequestFullscreen();
+      } else if (el.msRequestFullscreen) {
+        el.msRequestFullscreen();
+      }
+    }
+ };
+
+ ///-------------------Añadiendo sol-------------------------//
 /*coordinates
   London
   lat: 51.509, long: -0.126
@@ -49,18 +359,18 @@ var effect;
         });
     }
 
-  
-    TheWorldTime(51.509, -0.126);
 
-    init();
-    animate();
-    
-    
+ ///-----------------------------------------------------//
 
-    function initSky() {
+
+
+    ///-----------------Añadiendo SKY-----------------------//
+      function initSky() {
       // Add Sky Mesh
-      sky = new THREE.Sky();
-      scene.add( sky.mesh );
+       sky = new THREE.Sky();
+       scene.add( sky.mesh );
+
+      TheWorldTime(51.509, -0.126);
 
       // Add Sun Helper
       sunSphere = new THREE.Mesh(
@@ -70,7 +380,7 @@ var effect;
 
       sunSphere.position.y = - 700000;
       sunSphere.visible = false;
-      scene.add( sunSphere );
+      //scene.add( sunSphere );
 
       /// GUI
       var effectController  = {
@@ -87,7 +397,7 @@ var effect;
       var distance = 400000;
       function guiChanged() {
 
-        if(d < nd){
+        //if(d < nd){
         var uniforms = sky.uniforms;
         uniforms.turbidity.value = effectController.turbidity;
         uniforms.reileigh.value = effectController.reileigh;
@@ -101,7 +411,7 @@ var effect;
         sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
         sunSphere.visible = effectController.sun;
         sky.uniforms.sunPosition.value.copy( sunSphere.position );
-      }
+      /*}
       else{
         var uniforms = sky.uniforms;
         uniforms.turbidity.value = 1;
@@ -117,7 +427,7 @@ var effect;
         sunSphere.visible = effectController.sun;
         sky.uniforms.sunPosition.value.copy( sunSphere.position );
 
-      }
+      }*/
       renderer.render( scene, camera );
   }
       //var gui = new dat.GUI();
@@ -125,308 +435,10 @@ var effect;
       guiChanged();
     }
 
-    function planes(x,y,z){
-       
-   
+ ///------------------------------------------------------//
 
-        //plan.push(planx);
-        //planid.push(planx);
-        
-
-        
-    }
-
-    
-
-    function init(){
-
-        //Setup------------------------------------------
-        container = document.getElementById('container');
-            
-
-        renderer = new THREE.WebGLRenderer( { alpha: true} );
-        renderer.setPixelRatio( window.devicePixelRatio );
-        renderer.setSize( window.innerWidth, window.innerHeight);
-
-        scene = new THREE.Scene();
-
-        camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 20000000);
-        camera.position.set( 0, 100, 2000 );
-        camera.lookAt( new THREE.Vector3(0,0,0));
-
-        // Apply VR headset positional data to camera.
-        controls = new THREE.VRControls(camera); 
-
-        // // // Apply VR stereo rendering to renderer.
-        effect = new THREE.VREffect(renderer);
-        effect.setSize(window.innerWidth, window.innerHeight);
-
-        raycaster = new THREE.Raycaster();
-        //Add Objects To the Scene HERE-------------------
-
-        //Cubes position in the plane
-        // planes(4,0.5,-15);
-        // planes(2,0.5,-15);
-        // planes(0,0.5,-15);
-        // planes(-2,0.5,-15);
-        // planes(-4,0.5,-15);
-        // planes(-6,0.5,-15);
-
-             var geo = new THREE.CubeGeometry(3,3,3,3,3,3);
-        var mat = new THREE.MeshNormalMaterial();
-        var load = new THREE.TextureLoader();
-
-        var Mat1 = [];
-        var Mat2 = [];
-        var Mat3 = [];
-        var Mat4 = [];
-        var Mat5 = [];
-        var Mat6 = [];
-
-        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
-        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
-        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
-        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
-        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
-        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres.png')} ));
-
-        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/paris.png')} ));
-        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/paris.png')} ));
-        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/paris.png')} ));
-        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/paris.png')} ));
-        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/paris.png')} ));
-        Mat2.push(new THREE.MeshBasicMaterial( { map: load.load('images/paris.png')} ));
-
-        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/nyc.png')} ));
-        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/nyc.png')} ));
-        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/nyc.png')} ));
-        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/nyc.png')} ));
-        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/nyc.png')} ));
-        Mat3.push(new THREE.MeshBasicMaterial( { map: load.load('images/nyc.png')} ));
-         
-        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/SDQ.jpg')} ));
-        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/SDQ.jpg')} ));
-        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/SDQ.jpg')} ));
-        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/SDQ.jpg')} ));
-        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/SDQ.jpg')} ));
-        Mat4.push(new THREE.MeshBasicMaterial( { map: load.load('images/SDQ.jpg')} ));
-
-        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/tokyo.png')} ));
-        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/tokyo.png')} ));
-        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/tokyo.png')} ));
-        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/tokyo.png')} ));
-        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/tokyo.png')} ));
-        Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/tokyo.png')} ));
-
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/turquia.png')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/turquia.png')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/turquia.png')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/turquia.png')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/turquia.png')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/turquia.png')} ));
-         
-        plan[0] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat1));
-        plan[1] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat2));
-        plan[2] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat3));
-        plan[3] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat4));
-        plan[4] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat5));
-        plan[5] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat6));
-
-       // var planx = new THREE.Mesh( geo, new THREE.MeshBasicMaterial);
-        for (var i = 0; i < 6; i++) {
-            plan[i].position.z = -20;
-            plan[i].position.y = 0.5;
-            plan[i].position.x= i * 8;
-            
-            //reticle.add_collider(plan[i]);
-
-            scene.add(plan[i]); 
-        };
-
-        
-        //create gaze interaction manager
-         var reticle = vreticle.Reticle(camera);
-         scene.add(camera);
-        
-         var geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-         var material = new THREE.MeshNormalMaterial();
-         var cube = new THREE.Mesh(geometry, material);
-         reticle.add_collider(cube);
-
-         plan[0].ongazelong = function(){
-             this.material = reticle.get_random_hex_material();
-         }
-
-         plan[0].ongazeover = function(){
-             this.material = reticle.get_random_hex_material();
-         }
-
-         plan[0].ongazeout = function(){
-             this.material = reticle.default_material();
-         }
-
-         plan[1].ongazelong = function(){
-             this.material = reticle.get_random_hex_material();
-         }
-
-         plan[1].ongazeover = function(){
-             this.material = reticle.get_random_hex_material();
-         }
-
-         plan[1].ongazeout = function(){
-             this.material = reticle.default_material();
-         }
-
-         plan[2].ongazelong = function(){
-             this.material = reticle.get_random_hex_material();
-         }
-
-         plan[2].ongazeover = function(){
-             this.material = reticle.get_random_hex_material();
-         }
-
-         plan[2].ongazeout = function(){
-             this.material = reticle.default_material();
-         }
-
-         plan[3].ongazelong = function(){
-             this.material = reticle.get_random_hex_material();
-         }
-
-         plan[3].ongazeover = function(){
-             this.material = reticle.get_random_hex_material();
-         }
-
-         plan[3].ongazeout = function(){
-             this.material = reticle.default_material();
-         }
-
-         plan[4].ongazelong = function(){
-             this.material = reticle.get_random_hex_material();
-         }
-
-         plan[4].ongazeover = function(){
-             this.material = reticle.get_random_hex_material();
-         }
-
-         plan[4].ongazeout = function(){
-             this.material = reticle.default_material();
-         }
-
-         plan[5].ongazelong = function(){
-             this.material = reticle.get_random_hex_material();
-         }
-
-         plan[5].ongazeover = function(){
-             this.material = reticle.get_random_hex_material();
-         }
-
-         plan[5].ongazeout = function(){
-             this.material = reticle.default_material();
-         }
-
-         
-
-         reticle.reticle_loop();
-
-
-
-        //Sphere------------------
-        var sphere_geometry = new THREE.SphereGeometry(1);
-        var sphere_material = new THREE.MeshNormalMaterial();
-        sphere = new THREE.Mesh( sphere_geometry, sphere_material );
-
-        scene.add( sphere );
-        objects.push( sphere ); //if you are interested in detecting an intersection with this sphere
-        controls = new THREE.OrbitControls( camera, renderer.domElement );
-        controls.addEventListener( 'change', render );
-        //controls.maxPolarAngle = Math.PI / 2;
-        controls.enableZoom = false;
-        controls.enablePan = false;
-
-        
-        initSky();
-
-
-        var plane_geometry = new THREE.BoxGeometry( 400,400 );
-        var plane_material = new THREE.MeshBasicMaterial( {color: 0xAA3939, side: THREE.DoubleSide} );
-        var plane = new THREE.Mesh( plane_geometry, plane_material );
-        plane.rotation.set(-Math.PI/2, Math.PI/2000, Math.PI);
-        plane.position.y= -2;
-        scene.add( plane );
-
-        window.addEventListener('vrdisplaypresentchange', onVRDisplayPresentChange);
-        window.addEventListener( 'resize', onWindowResize, false );
-        //Events------------------------------------------
-       
-        document.addEventListener('click', onMouseClick, false );
-        document.addEventListener('mousedown', onMouseDown, false);
-        document.addEventListener('mouseup', onMouseUp, false);
-        document.addEventListener('mousemove', onMouseMove, false);
-        document.addEventListener('mouseout', onMouseOut, false);
-        document.addEventListener('keydown', onKeyDown, false );
-        document.addEventListener('keyup', onKeyUp, false );
-        document.addEventListener('keyz', onKeyZ, false );
-        document.addEventListener('keyx', onKeyX, false );
-        document.addEventListener('keyc', onKeyC, false );  
-        document.body.appendChild( renderer.domElement  );  
-
-       
-        //Final touches-----------------------------------
-        //container.appendChild( );
-
-    }
-// Request animation frame loop function
-
-function animate() {
-        
-
-        render();
-
-         // Update VR headset position and apply to camera.
-        controls.update();
-        // Render the scene.
-        effect.render(scene, camera);
-
-        requestAnimationFrame( animate );
-    }
-
-function onResize() {
-  console.log('Resizing to %s x %s.', window.innerWidth, window.innerHeight);
-  effect.setSize(window.innerWidth, window.innerHeight);
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-}
-
-function onVRDisplayPresentChange() {
-  console.log('onVRDisplayPresentChange');
-  onResize();
-}
-
-    function render(){
-
-        if ( player ){
-
-            updateCameraPosition();
-
-            checkKeyStates();
-
-            camera.lookAt( player.position );
-
-        }
-        //Render Scene---------------------------------------
-        //making cubes rotation
-        for (var j = 0; j < 6; j++) {
-            plan[j].rotation.y +=0.02;
-        };
-        
-        renderer.clear();
-        renderer.render( scene , camera );
-
-              
-    }
-
-    function onMouseClick(){
+///-----------------------Other functions-------------------///
+ function onMouseClick(){
         intersects = calculateIntersects( event );
 
         if ( intersects.length > 0 ){
@@ -496,6 +508,7 @@ function onVRDisplayPresentChange() {
         renderer.setSize( window.innerWidth, window.innerHeight );
 
     }
+
     function calculateIntersects( event ){
 
         //Determine objects intersected by raycaster
@@ -512,7 +525,7 @@ function onVRDisplayPresentChange() {
         return intersects;
     }
 
-};
+
 
 //function for colition 
  var colition = function(){
@@ -529,6 +542,10 @@ function onVRDisplayPresentChange() {
    // };
  
 }
+
+
+///----------------------------------------------------------///
+
 
 //function that creates player
 var createPlayer = function(data){
@@ -595,6 +612,7 @@ var updatePlayerData = function(){
     playerData.r_z = player.rotation.z;
 
 };
+
 var checkKeyStates = function(){
 
     if (keyState[38] || keyState[87]) {

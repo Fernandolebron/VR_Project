@@ -61,6 +61,10 @@ io.on('connection', function(socket){
         console.log('Esta viendo el cubo');
     });
 
+    socket.on('lookat', function(cube){
+        console.log('Estas Mirando al cubo ' + cube);
+    });
+
 });
 
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
