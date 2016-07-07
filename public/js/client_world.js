@@ -76,7 +76,7 @@ var loadWorld = function(){
         var Mat6 = [];
 
         Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/Paris/paris.png')} ));
-        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/Paris/londres.png')} ));
+        Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/Paris/paris.png')} ));
         Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/Paris/paris2.png')} ));
         Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/Paris/paris45.jpg')} ));
         Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/paris/paris6.jpg')} ));
@@ -110,12 +110,12 @@ var loadWorld = function(){
         Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/ny/5.jpg')} ));
         Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/ny/6.jpg')} ));
 
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/3.jpg')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/2.jpg')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/1.jpg')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/4.jpg')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/5.jpg')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/6.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres/londres.png')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres/londres.png')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres/londres.png')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres/londres.png')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londes/londres.png')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londes/londres.png')} ));
          
         plan[0] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat1));
         plan[1] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat2));
@@ -132,91 +132,109 @@ var loadWorld = function(){
          
          plan[0].ongazelong = function(){
             socket.emit('lookat', 'Paris');
+            TheWorldTime( 48.856, 2.352);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[0].ongazeover = function(){
              socket.emit('lookat', 'Paris');
+            TheWorldTime( 48.856, 2.352);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[0].ongazeout = function(){
             socket.emit('lookat', 'Paris');
+            TheWorldTime( 48.856, 2.352);
             // this.material = reticle.default_material();
          }
 
           plan[1].ongazelong = function(){
             socket.emit('lookat', 'Tokio');
+            TheWorldTime(35.689, 139.691);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[1].ongazeover = function(){
              socket.emit('lookat', 'Tokio');
+             TheWorldTime(35.689, 139.691);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[1].ongazeout = function(){
             socket.emit('lookat', 'Tokio');
+            TheWorldTime(35.689, 139.691);
             // this.material = reticle.default_material();
          }
 
          plan[2].ongazelong = function(){
             socket.emit('lookat', 'Turquia');
+            TheWorldTime( 38.962, 35.2412);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[2].ongazeover = function(){
              socket.emit('lookat', 'Turquia');
+             TheWorldTime( 38.962, 35.2412);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[2].ongazeout = function(){
             socket.emit('lookat', 'Turquia');
+            TheWorldTime( 38.962, 35.2412);
             // this.material = reticle.default_material();
          }
 
           plan[3].ongazelong = function(){
             socket.emit('lookat', 'Republica Dominicana');
+            TheWorldTime( 18.500, -69.988);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[3].ongazeover = function(){
              socket.emit('lookat', 'Republica Dominicana');
+             TheWorldTime( 18.500, -69.988);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[3].ongazeout = function(){
             socket.emit('lookat', 'Republica Dominicana');
+            TheWorldTime( 18.500, -69.988);
             // this.material = reticle.default_material();
          }
 
           plan[4].ongazelong = function(){
             socket.emit('lookat', 'New York');
+            TheWorldTime( 40.712, -74.005);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[4].ongazeover = function(){
              socket.emit('lookat', 'New York');
+             TheWorldTime( 40.712, -74.005);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[4].ongazeout = function(){
             socket.emit('lookat', 'New York');
+            TheWorldTime( 40.712, -74.005);
             // this.material = reticle.default_material();
          }
 
           plan[5].ongazelong = function(){
-            socket.emit('lookat', 'Argentina');
+            socket.emit('lookat', 'Londres');
+            TheWorldTime( 51.509, -0.126);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[5].ongazeover = function(){
-             socket.emit('lookat', 'Argentina');
+             socket.emit('lookat', 'Londres');
+             TheWorldTime( 51.509, -0.126);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[5].ongazeout = function(){
-            socket.emit('lookat', 'Argentina');
+            socket.emit('lookat', 'Londres');
+            TheWorldTime( 51.509, -0.126);
             // this.material = reticle.default_material();
          }
 
@@ -354,8 +372,21 @@ var loadWorld = function(){
             d = new Date();
             var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
             nd = new Date(utc + (1000*response.rawOffset));
-            alert("The time in London is " + nd.toLocaleString() +
-        ".");
+            alert("The time is " + nd.toLocaleString() + ".");
+            /*
+            if(latitude == 51.509 && longitude == -0.126){
+              alert("The time in London is " + nd.toLocaleString() + ".");
+            }
+            else if(latitude == 18.500 && longitude == -69.988){
+              alert("The time in Santo Domingo is " + nd.toLocaleString() + ".");
+            }
+            else if(latitude == 48.856 && longitude ==  2.352){
+              alert("The time in Paris is " + nd.toLocaleString() + ".");
+            }
+            else if(latitude == 38.962 && longitude == 35.241){
+              alert("The time in Turkey is " + nd.toLocaleString() + ".");
+            }
+            */
         });
     }
 
@@ -370,7 +401,7 @@ var loadWorld = function(){
        sky = new THREE.Sky();
        scene.add( sky.mesh );
 
-      TheWorldTime(51.509, -0.126);
+    //  TheWorldTime(51.509, -0.126);
 
       // Add Sun Helper
       sunSphere = new THREE.Mesh(
@@ -397,7 +428,7 @@ var loadWorld = function(){
       var distance = 400000;
       function guiChanged() {
 
-        //if(d < nd){
+        if(d < nd){
         var uniforms = sky.uniforms;
         uniforms.turbidity.value = effectController.turbidity;
         uniforms.reileigh.value = effectController.reileigh;
@@ -411,7 +442,7 @@ var loadWorld = function(){
         sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
         sunSphere.visible = effectController.sun;
         sky.uniforms.sunPosition.value.copy( sunSphere.position );
-      /*}
+      }
       else{
         var uniforms = sky.uniforms;
         uniforms.turbidity.value = 1;
@@ -427,7 +458,7 @@ var loadWorld = function(){
         sunSphere.visible = effectController.sun;
         sky.uniforms.sunPosition.value.copy( sunSphere.position );
 
-      }*/
+      }
       renderer.render( scene, camera );
   }
       //var gui = new dat.GUI();
@@ -661,7 +692,7 @@ var checkKeyStates = function(){
         camera.position.x *= 2; 
     }
     if(keyState[88]){//x
-        camera.position.y *= -2; 
+        camera.position.y *= 2; 
     }
     if(keyState[67]){//c
         camera.position.z *= 2; 
