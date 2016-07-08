@@ -138,13 +138,13 @@ var loadWorld = function(){
 
          plan[0].ongazeover = function(){
              socket.emit('lookat', 'Paris');
-            TheWorldTime( 48.856, 2.352);
+         //   TheWorldTime( 48.856, 2.352);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[0].ongazeout = function(){
             socket.emit('lookat', 'Paris');
-            TheWorldTime( 48.856, 2.352);
+           // TheWorldTime( 48.856, 2.352);
             // this.material = reticle.default_material();
          }
 
@@ -156,13 +156,13 @@ var loadWorld = function(){
 
          plan[1].ongazeover = function(){
              socket.emit('lookat', 'Tokio');
-             TheWorldTime(35.689, 139.691);
+         //    TheWorldTime(35.689, 139.691);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[1].ongazeout = function(){
             socket.emit('lookat', 'Tokio');
-            TheWorldTime(35.689, 139.691);
+           // TheWorldTime(35.689, 139.691);
             // this.material = reticle.default_material();
          }
 
@@ -174,13 +174,13 @@ var loadWorld = function(){
 
          plan[2].ongazeover = function(){
              socket.emit('lookat', 'Turquia');
-             TheWorldTime( 38.962, 35.2412);
+             //TheWorldTime( 38.962, 35.2412);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[2].ongazeout = function(){
             socket.emit('lookat', 'Turquia');
-            TheWorldTime( 38.962, 35.2412);
+       //     TheWorldTime( 38.962, 35.2412);
             // this.material = reticle.default_material();
          }
 
@@ -192,13 +192,13 @@ var loadWorld = function(){
 
          plan[3].ongazeover = function(){
              socket.emit('lookat', 'Republica Dominicana');
-             TheWorldTime( 18.500, -69.988);
+          //   TheWorldTime( 18.500, -69.988);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[3].ongazeout = function(){
             socket.emit('lookat', 'Republica Dominicana');
-            TheWorldTime( 18.500, -69.988);
+          //  TheWorldTime( 18.500, -69.988);
             // this.material = reticle.default_material();
          }
 
@@ -210,13 +210,13 @@ var loadWorld = function(){
 
          plan[4].ongazeover = function(){
              socket.emit('lookat', 'New York');
-             TheWorldTime( 40.712, -74.005);
+             //TheWorldTime( 40.712, -74.005);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[4].ongazeout = function(){
             socket.emit('lookat', 'New York');
-            TheWorldTime( 40.712, -74.005);
+            //TheWorldTime( 40.712, -74.005);
             // this.material = reticle.default_material();
          }
 
@@ -228,13 +228,13 @@ var loadWorld = function(){
 
          plan[5].ongazeover = function(){
              socket.emit('lookat', 'Londres');
-             TheWorldTime( 51.509, -0.126);
+          //   TheWorldTime( 51.509, -0.126);
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[5].ongazeout = function(){
             socket.emit('lookat', 'Londres');
-            TheWorldTime( 51.509, -0.126);
+         //   TheWorldTime( 51.509, -0.126);
             // this.material = reticle.default_material();
          }
 
@@ -363,6 +363,34 @@ var loadWorld = function(){
   lat: 40.712, long: -74.005
   */  
 
+  function TheWorldTime(latitude, longitude){//
+
+        var url = "http://api.timezonedb.com/v2/get-time-zone?key=D8RGXM6K480Q&format=json&by=position&lat="+latitude+"lng="+longitude+"&time=1467978270";
+        $.ajax({
+            url: url,
+        }).done(function(response) {
+            d = new Date();
+            var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+            nd = new Date(utc + (1000*response.gmtOffset));
+            alert("The time is " + nd.toLocaleString() + ".");
+                       
+        });
+    }
+
+
+function TheWorldWeather(latitude, longitude){
+
+       var url = "http://api.openweathermap.org/data/2.5/weather?q=London&APPID=d447b3f167725172e64ca9096871d7c5";
+        $.ajax({
+            url: url,
+        }).done(function(response) {
+           // nd = response.
+            alert("The weather is " + response.name + ".");
+                       
+        });
+}
+
+/*
   function TheWorldTime(latitude, longitude){
 
         var url = "https://maps.googleapis.com/maps/api/timezone/json?location="+latitude+","+longitude+"&timestamp=" + (Math.round((new Date().getTime()) / 1000)).toString() + "&sensor=false";
@@ -386,9 +414,11 @@ var loadWorld = function(){
             else if(latitude == 38.962 && longitude == 35.241){
               alert("The time in Turkey is " + nd.toLocaleString() + ".");
             }
-            */
+            
         });
     }
+
+*/
 
 
  ///-----------------------------------------------------//
@@ -401,7 +431,7 @@ var loadWorld = function(){
        sky = new THREE.Sky();
        scene.add( sky.mesh );
 
-    //  TheWorldTime(51.509, -0.126);
+      TheWorldWeather( 51.509, -0.126);
 
       // Add Sun Helper
       sunSphere = new THREE.Mesh(
