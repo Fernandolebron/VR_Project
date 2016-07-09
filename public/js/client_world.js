@@ -617,7 +617,7 @@ function animation() {
        checkKeyStates();
        animation();   
       // Update VR headset position and apply to camera.
-      controls.update();
+      controls.update(ctrlx, ctrly, ctrlz);
 
       // Render the scene.
       effect.render(scene, camera);
@@ -1010,6 +1010,10 @@ var createPlayer = function(data){
     moveSpeed = data.speed;
     turnSpeed = data.turnSpeed;
 
+    ctrlx = player.position.x;
+    ctrly = player.position.y;
+    ctrlz = player.position.z;
+
     updateCameraPosition();
 
     objects.push( player );
@@ -1048,6 +1052,10 @@ var updatePlayerData = function(){
     playerData.r_x = player.rotation.x;
     playerData.r_y = player.rotation.y;
     playerData.r_z = player.rotation.z;
+
+    ctrlx = player.position.x;
+    ctrly = player.position.y;
+    ctrlz = player.position.z;
 
 };
 

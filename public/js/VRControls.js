@@ -62,7 +62,7 @@ THREE.VRControls = function ( object, onError ) {
 
 	///
 
-	this.update = function () {
+	this.update = function (ctrlx, ctrly, ctrlz) {
 
 		if ( vrInput ) {
 
@@ -82,7 +82,7 @@ THREE.VRControls = function ( object, onError ) {
 
 				} else {
 
-					object.position.set( 0, 0, 0 );
+					object.position.set( ctrlx, ctrly, ctrlz);
 
 				}
 
@@ -103,7 +103,7 @@ THREE.VRControls = function ( object, onError ) {
 
 				} else {
 
-					object.position.set( 0, 0, 0 );
+					object.position.set(ctrlx, ctrly, ctrlz);
 
 				}
 
