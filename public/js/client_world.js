@@ -4,24 +4,24 @@ var keyState = {};
 var d, nd;
 var player, playerId, moveSpeed, turnSpeed;
 var playerData;
-var sky, scene, renderer, camera, effect, sphere, reticle;
+var sky, scene, renderer, camera, effect, sphere, reticle, currentCityTextMesh;
 var otherPlayers = [], otherPlayersId = [];
 var plan=[];
 var homecubes=[];
 // Apply VR headset positional data to camera.
 var time = new Date();
 var time2=0; 
-
-var currentCityTextMesh; 
 var currentCityText;
+var currentCityTextMesh; 
+// var currentCityText;
 
- // City and weather API set up code snippet from https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/ needs more adjustments
-          cityWeather = {},
-          cityTimes = [],
-          currentCity = 0,
-          currentCityText = new THREE.TextGeometry(),
-          currentCityTextMesh = new THREE.Mesh();
-          cities = ['Paris', 'London', 'Tokio', 'New York', 'Santo Domingo', 'Turkey'];
+         // // City and weather API set up code snippet from https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/ needs more adjustments
+         //          cityWeather = {},
+         //          cityTimes = [],
+         //          currentCity = 0,
+         //          currentCityText = new THREE.TextGeometry(),
+         //          currentCityTextMesh = new THREE.Mesh();
+         //          cities = ['Paris', 'London', 'Tokio', 'New York', 'Santo Domingo', 'Turkey'];
 
 var loadWorld = function(){
 
@@ -46,6 +46,8 @@ var loadWorld = function(){
     // Apply VR stereo rendering to renderer.
     effect = new THREE.VREffect(renderer);
     effect.setSize(window.innerWidth, window.innerHeight);
+
+     currentCityTextMesh = new THREE.Mesh(currentCityText, new THREE.MeshBasicMaterial({ color: 0xAA3939, opacity: 1}));
 
     reticle = vreticle.Reticle(camera);
     scene.add(camera);
@@ -124,12 +126,12 @@ var loadWorld = function(){
         Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/ny/5.jpg')} ));
         Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/ny/6.jpg')} ));
 
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres/londres.png')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres/londres.png')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres/londres.png')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres/londres.png')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londes/londres.png')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londes/londres.png')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/1.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/2.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/3.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/4.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/5.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/6.jpg')} ));
         
 
         GoBack.push(new THREE.MeshBasicMaterial( { map: load.load('images/menu/home.png')} ));
@@ -181,6 +183,7 @@ var loadWorld = function(){
           };
              //this.material = reticle.get_random_hex_material();
               displayCurrentCityName('Paris');
+
          }
 
          plan[0].ongazeout = function(){
@@ -191,6 +194,7 @@ var loadWorld = function(){
           };
             // this.material = reticle.default_material();
              displayCurrentCityName('Paris');
+             //scene.remove(currentCityTextMesh);
          }
 
           plan[1].ongazelong = function(){
@@ -222,6 +226,7 @@ var loadWorld = function(){
           };
             // this.material = reticle.default_material();
             displayCurrentCityName('Tokio');
+           // scene.remove(currentCityTextMesh);
          }
 
          plan[2].ongazelong = function(){
@@ -253,6 +258,7 @@ var loadWorld = function(){
                 time2 = 0;
           };
           displayCurrentCityName('Turquia');
+          //scene.remove(currentCityTextMesh);
          }
 
           plan[3].ongazelong = function(){
@@ -283,6 +289,7 @@ var loadWorld = function(){
                  time2 = 0;
           };
           displayCurrentCityName('Republica Dominicana');
+          //scene.remove(currentCityTextMesh);
          }
 
           plan[4].ongazelong = function(){
@@ -314,6 +321,8 @@ var loadWorld = function(){
             time2 = 0;
           };
           displayCurrentCityName('New York');
+          //scene.remove(currentCityTextMesh);
+
          }
 
           plan[5].ongazelong = function(){
@@ -333,6 +342,7 @@ var loadWorld = function(){
               time2 = 0;
           };
           displayCurrentCityName('Argentina');
+
          }
 
 
@@ -344,6 +354,8 @@ var loadWorld = function(){
               time2 = 0;
           };
            displayCurrentCityName('Argentina');
+          // scene.remove(currentCityTextMesh);
+        
          }
 
          // var planx = new THREE.Mesh( geo, new THREE.MeshBasicMaterial);
@@ -529,24 +541,7 @@ function applyWeatherConditions() {
     setTimeout(applyWeatherConditions, 5000);
 }
 
- // function displayCurrentCityName(name) {  // code snippet sacado del siguiente tutorial https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/
- //        scene.remove(currentCityTextMesh);
 
- //        currentCityText = new THREE.TextGeometry(name, {
- //          size: 4,
- //          height: 1
- //        });
- //        currentCityTextMesh = new THREE.Mesh(currentCityText, new THREE.MeshBasicMaterial({
- //          color: 0xffffff, opacity: 1
- //        }));
-
- //        currentCityTextMesh.position.y = 10;
- //        currentCityTextMesh.position.z = 20;
- //        currentCityTextMesh.rotation.x = 0;
- //        currentCityTextMesh.rotation.y = -180;
-
- //        scene.add(currentCityTextMesh);
- //      }
 
 function animation() {
   var elapsedSeconds = clock.getElapsedTime(),
@@ -664,7 +659,7 @@ function animation() {
         el.msRequestFullscreen();
       }
     }
- };
+ 
 
  ///-------------------Añadiendo sol-------------------------//
 /*coordinates
@@ -712,16 +707,10 @@ function displayCurrentCityName(name) {  // code snippet sacado del siguiente tu
         currentCityText = new THREE.TextGeometry(name, {
           size: 4,
           height: 1,
-          curveSegments: 3,
+          
           font: font
-          // weight: 'normal',
-          // bevelThickness: 3,
-          // bevelSize: 3,
-          // bevelEnabled: true
         });
         
-      currentCityTextMesh = new THREE.Mesh(currentCityText, new THREE.MeshBasicMaterial({ color: 0xAA3939, opacity: 1}));
-
         currentCityTextMesh.position.y = 4;
         currentCityTextMesh.position.z = -10;
        // currentCityTextMesh.position.x = -10;
@@ -748,6 +737,8 @@ function TheWorldWeather(latitude, longitude){
         });
 }
 
+
+};//close loadworld
 /*
   function TheWorldTime(latitude, longitude){
 
@@ -821,7 +812,7 @@ function TheWorldWeather(latitude, longitude){
         uniforms.turbidity.value = effectController.turbidity;
         uniforms.reileigh.value = effectController.reileigh;
         uniforms.luminance.value = effectController.luminance;
-        uniforms.mieCoefficient.value = effectController.mieCoefficient;
+        uniforms.mieCoefficient.value = effectController.mieCoefficient;1
         uniforms.mieDirectionalG.value = effectController.mieDirectionalG;
         var theta = Math.PI * ( effectController.inclination - 0.5 );
         var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
@@ -937,7 +928,7 @@ function TheWorldWeather(latitude, longitude){
         vector.set( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1, 0.5 );
         vector.unproject( camera );
 
-        raycaster.ray.set( camera.position, vector.sub( camera.position ).normalize() );
+       raycaster.ray.set( camera.position, vector.sub( camera.position ).normalize() );
 
         var intersects = raycaster.intersectObjects( objects );
 
