@@ -47,7 +47,6 @@ var loadWorld = function(){
     effect = new THREE.VREffect(renderer);
     effect.setSize(window.innerWidth, window.innerHeight);
 
-     currentCityTextMesh = new THREE.Mesh(currentCityText, new THREE.MeshBasicMaterial({ color: 0xAA3939, opacity: 1}));
 
     reticle = vreticle.Reticle(camera);
     scene.add(camera);
@@ -193,8 +192,7 @@ var loadWorld = function(){
               time2 = 0;
           };
             // this.material = reticle.default_material();
-             displayCurrentCityName('Paris');
-             //scene.remove(currentCityTextMesh);
+            
          }
 
           plan[1].ongazelong = function(){
@@ -225,8 +223,7 @@ var loadWorld = function(){
               time2 = 0;
           };
             // this.material = reticle.default_material();
-            displayCurrentCityName('Tokio');
-           // scene.remove(currentCityTextMesh);
+         
          }
 
          plan[2].ongazelong = function(){
@@ -257,8 +254,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                 time2 = 0;
           };
-          displayCurrentCityName('Turquia');
-          //scene.remove(currentCityTextMesh);
+        
          }
 
           plan[3].ongazelong = function(){
@@ -288,8 +284,8 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                  time2 = 0;
           };
-          displayCurrentCityName('Republica Dominicana');
-          //scene.remove(currentCityTextMesh);
+          
+          
          }
 
           plan[4].ongazelong = function(){
@@ -320,7 +316,7 @@ var loadWorld = function(){
             //this.material = reticle.get_random_hex_material();
             time2 = 0;
           };
-          displayCurrentCityName('New York');
+          
           //scene.remove(currentCityTextMesh);
 
          }
@@ -353,8 +349,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
               time2 = 0;
           };
-           displayCurrentCityName('Argentina');
-          // scene.remove(currentCityTextMesh);
+           
         
          }
 
@@ -710,7 +705,8 @@ function displayCurrentCityName(name) {  // code snippet sacado del siguiente tu
           
           font: font
         });
-        
+            currentCityTextMesh = new THREE.Mesh(currentCityText, new THREE.MeshBasicMaterial({ color: 0xAA3939, opacity: 1}));
+
         currentCityTextMesh.position.y = 4;
         currentCityTextMesh.position.z = -10;
        // currentCityTextMesh.position.x = -10;
