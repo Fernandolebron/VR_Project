@@ -561,7 +561,9 @@ function animation() {
     }
       
     lastColorRange = currentColorRange;
+
   }
+    particles.position.y-=0.05;
   
   //requestAnimationFrame(animate); // TODO: This will add the animations to the main loop, if you have it somewhere else just call animate
   // TODO: Add update code if necessary here
