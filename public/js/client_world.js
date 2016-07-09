@@ -10,6 +10,7 @@ var plan=[];
 // Apply VR headset positional data to camera.
 var time = new Date();
 var time2= 0; 
+var currentCityTextMesh; 
 
 var loadWorld = function(){
 
@@ -37,16 +38,12 @@ var loadWorld = function(){
 
     reticle = vreticle.Reticle(camera);
     scene.add(camera);
-        
-    //raycaster = new THREE.Raycaster();
-       
+      
+    currentCityTextMesh = new THREE.Mesh(currentCityText, new THREE.MeshBasicMaterial({
+      color: 0xffffff, opacity: 1
+    })); 
 
-    // // Add a repeating grid as a skybox.
-    // var boxWidth = 5;
-    // 
-    // loader.load('/images/box.png', onTextureLoaded);
-
-    initSky();
+       initSky();
 
     ///------------Añadiendo el piso--------------///
         var plane_geometry = new THREE.BoxGeometry( 400,400 );
@@ -132,6 +129,8 @@ var loadWorld = function(){
          
          plan[0].ongazelong = function(){
             socket.emit('lookat', 'Paris');
+            var names = 'paris';
+            displayCurrentCityName(names);
              //this.material = reticle.get_random_hex_material();
          }
 
@@ -244,7 +243,8 @@ var loadWorld = function(){
       }
     });
 
-        // Request animation frame loop function
+   
+    // Request animation frame loop function
     var lastRender = 0;
     function animate(timestamp) {
       var delta = Math.min(timestamp - lastRender, 500);
@@ -324,6 +324,7 @@ var loadWorld = function(){
     }
  };
 
+
  ///-------------------Añadiendo sol-------------------------//
 /*coordinates
   London
@@ -358,6 +359,27 @@ var loadWorld = function(){
         ".");
         });
     }
+
+///------------------------------------------------//
+//------Funcion para escribir texto en la scena-----//
+ function displayCurrentCityName(name) {
+    scene.remove(currentCityTextMesh);
+    currentCityText = new THREE.TextGeometry(name, {
+      size: 4,
+      height: 1
+      
+    currentCityTextMesh.position.y = 0.5;
+    currentCityTextMesh.position.z = -20;
+    currentCityTextMesh.position.x = -10;
+    currentCityTextMesh.rotation.x = 0;
+    currentCityTextMesh.rotation.y = -180;
+    scene.add(currentCityTextMesh);
+    });
+   
+    
+}
+
+
 
 
  ///-----------------------------------------------------//
