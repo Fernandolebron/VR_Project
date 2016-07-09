@@ -15,6 +15,8 @@ var time2=0;
 var currentCityTextMesh; 
 var currentCityText;
 
+var ctrlx, ctrly, ctrlz;
+
  // City and weather API set up code snippet from https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/ needs more adjustments
           cityWeather = {},
           cityTimes = [],
@@ -165,6 +167,9 @@ var loadWorld = function(){
           if (time2 < 4){time2++}
             else if (time2 == 4){ 
             socket.emit('lookat', 'Paris');
+            player.position.x = 30;
+            player.position.z = 30;
+            updatePlayerData();
             time2 = 0;
           };
 
@@ -197,6 +202,9 @@ var loadWorld = function(){
             if (time2 < 4){time2++}
             else if (time2 == 4){ 
             socket.emit('lookat', 'Tokio');
+            player.position.x = -30;
+            player.position.z = -30;
+            updatePlayerData();
              //this.material = reticle.get_random_hex_material();
                time2 = 0;
           };
@@ -228,6 +236,9 @@ var loadWorld = function(){
           if (time2 < 4){time2++}
             else if (time2 == 4){ 
             socket.emit('lookat', 'Turquia');
+            player.position.x = 60;
+            player.position.z = 60;
+            updatePlayerData();
              //this.material = reticle.get_random_hex_material();
                 time2 = 0;
           };
@@ -259,6 +270,9 @@ var loadWorld = function(){
            if (time2 < 4){time2++}
             else if (time2 == 4){  
             socket.emit('lookat', 'Republica Dominicana');
+            player.position.x = -60;
+            player.position.z = -60;
+            updatePlayerData();
              //this.material = reticle.get_random_hex_material();
                  time2 = 0;
           };
@@ -289,6 +303,10 @@ var loadWorld = function(){
             if (time2 < 4){time2++}
             else if (time2 == 4){ 
             socket.emit('lookat', 'New York');
+             player.position.x = 90;
+            player.position.z = -90;
+            updatePlayerData();
+
              //this.material = reticle.get_random_hex_material();
                    time2 = 0;
           };
@@ -320,6 +338,9 @@ var loadWorld = function(){
             if (time2 < 4){time2++}
             else if (time2 == 4){ 
             socket.emit('lookat', 'Argentina');
+            player.position.x = -90;
+            player.position.z = 90;
+            updatePlayerData();
              //this.material = reticle.get_random_hex_material();
               time2 = 0;
           };
