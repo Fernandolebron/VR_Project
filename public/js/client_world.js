@@ -153,137 +153,178 @@ var loadWorld = function(){
         //create gaze interaction manager
          //var reticle = vreticle.Reticle(camera);
          
+         //create gaze interaction manager
+         //var reticle = vreticle.Reticle(camera);
+         
          
          plan[0].ongazelong = function(){
+
+          if (time2 < 4){time2++}
+            else if (time2 == 4){ 
             socket.emit('lookat', 'Paris');
-            player.position.x = 30;
-            player.position.z = 30;
-           // displayCurrentCityName(cities[0]);
-            updatePlayerData();
-            TheWorldTime( 48.856, 2.352);
+            time2 = 0;
+          };
+
+            displayCurrentCityName('Paris')
+            
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[0].ongazeover = function(){
+          if (time2 < 4){time2++}
+            else if (time2 == 4){ 
              socket.emit('lookat', 'Paris');
-         //   TheWorldTime( 48.856, 2.352);
+               time2 = 0;
+          };
              //this.material = reticle.get_random_hex_material();
+              displayCurrentCityName('Paris')
          }
 
          plan[0].ongazeout = function(){
+          if (time2 < 4){time2++}
+            else if (time2 == 4){ 
             socket.emit('lookat', 'Paris');
-           // TheWorldTime( 48.856, 2.352);
+              time2 = 0;
+          };
             // this.material = reticle.default_material();
+             displayCurrentCityName('Paris')
          }
 
           plan[1].ongazelong = function(){
+            if (time2 < 4){time2++}
+            else if (time2 == 4){ 
             socket.emit('lookat', 'Tokio');
-            player.position.x = -30;
-            player.position.z = -30;
-            updatePlayerData();
-
-            TheWorldTime(35.689, 139.691);
              //this.material = reticle.get_random_hex_material();
+               time2 = 0;
+          };
+
          }
 
          plan[1].ongazeover = function(){
+          if (time2 < 4){time2++}
+            else if (time2 == 4){ 
              socket.emit('lookat', 'Tokio');
-         //    TheWorldTime(35.689, 139.691);
+               time2 = 0;
+          };
              //this.material = reticle.get_random_hex_material();
          }
 
          plan[1].ongazeout = function(){
+         if (time2 < 4){time2++}
+            else if (time2 == 4){ 
             socket.emit('lookat', 'Tokio');
-           // TheWorldTime(35.689, 139.691);
+              time2 = 0;
+          };
             // this.material = reticle.default_material();
          }
 
          plan[2].ongazelong = function(){
+          if (time2 < 4){time2++}
+            else if (time2 == 4){ 
             socket.emit('lookat', 'Turquia');
-            player.position.x = 60;
-            player.position.z = 60;
-            updatePlayerData();
-
-            TheWorldTime( 38.962, 35.2412);
              //this.material = reticle.get_random_hex_material();
+                time2 = 0;
+          };
          }
 
          plan[2].ongazeover = function(){
-             socket.emit('lookat', 'Turquia');
-             //TheWorldTime( 38.962, 35.2412);
+          if (time2 < 4){time2++}
+            else if (time2 == 4){ 
+            socket.emit('lookat', 'Turquia');
              //this.material = reticle.get_random_hex_material();
+                time2 = 0;
+          };
          }
 
          plan[2].ongazeout = function(){
+          if (time2 < 4){time2++}
+            else if (time2 == 4){ 
             socket.emit('lookat', 'Turquia');
-       //     TheWorldTime( 38.962, 35.2412);
-            // this.material = reticle.default_material();
+             //this.material = reticle.get_random_hex_material();
+                time2 = 0;
+          };
          }
 
           plan[3].ongazelong = function(){
+           if (time2 < 4){time2++}
+            else if (time2 == 4){  
             socket.emit('lookat', 'Republica Dominicana');
-            player.position.x = -60;
-            player.position.z = -60;
-            updatePlayerData();
-
-            TheWorldTime( 18.500, -69.988);
              //this.material = reticle.get_random_hex_material();
+                 time2 = 0;
+          };
          }
 
          plan[3].ongazeover = function(){
-             socket.emit('lookat', 'Republica Dominicana');
-          //   TheWorldTime( 18.500, -69.988);
+           if (time2 < 4){time2++}
+            else if (time2 == 4){ 
+            socket.emit('lookat', 'Republica Dominicana');
              //this.material = reticle.get_random_hex_material();
+                 time2 = 0;
+          };
          }
 
          plan[3].ongazeout = function(){
+            if (time2 < 4){time2++}
+            else if (time2 == 4){ 
             socket.emit('lookat', 'Republica Dominicana');
-          //  TheWorldTime( 18.500, -69.988);
-            // this.material = reticle.default_material();
+             //this.material = reticle.get_random_hex_material();
+                 time2 = 0;
+          };
          }
 
           plan[4].ongazelong = function(){
+            if (time2 < 4){time2++}
+            else if (time2 == 4){ 
             socket.emit('lookat', 'New York');
-            player.position.x = 90;
-            player.position.z = -90;
-            updatePlayerData();
-
-            TheWorldTime( 40.712, -74.005);
              //this.material = reticle.get_random_hex_material();
+                   time2 = 0;
+          };
          }
 
          plan[4].ongazeover = function(){
-             socket.emit('lookat', 'New York');
-             //TheWorldTime( 40.712, -74.005);
-             //this.material = reticle.get_random_hex_material();
+           if (time2 < 4){time2++}
+            else if (time2 == 4){ 
+            socket.emit('lookat', 'New York');
+            //this.material = reticle.get_random_hex_material();
+            time2 = 0;
+          };
          }
 
          plan[4].ongazeout = function(){
+          if (time2 < 4){time2++}
+            else if (time2 == 4){ 
             socket.emit('lookat', 'New York');
-            //TheWorldTime( 40.712, -74.005);
-            // this.material = reticle.default_material();
+            //this.material = reticle.get_random_hex_material();
+            time2 = 0;
+          };
          }
 
           plan[5].ongazelong = function(){
-            socket.emit('lookat', 'Londres');
-            player.position.x = -90;
-            player.position.z = 90;
-            updatePlayerData();
-
-            TheWorldTime( 51.509, -0.126);
+            if (time2 < 4){time2++}
+            else if (time2 == 4){ 
+            socket.emit('lookat', 'Argentina');
              //this.material = reticle.get_random_hex_material();
+              time2 = 0;
+          };
          }
 
          plan[5].ongazeover = function(){
-             socket.emit('lookat', 'Londres');
-          //   TheWorldTime( 51.509, -0.126);
+             if (time2 < 4){time2++}
+            else if (time2 == 4){ 
+            socket.emit('lookat', 'Argentina');
              //this.material = reticle.get_random_hex_material();
+              time2 = 0;
+          };
          }
 
+
          plan[5].ongazeout = function(){
-            socket.emit('lookat', 'Londres');
-         //   TheWorldTime( 51.509, -0.126);
-            // this.material = reticle.default_material();
+               if (time2 < 4){time2++}
+            else if (time2 == 4){ 
+            socket.emit('lookat', 'Argentina');
+             //this.material = reticle.get_random_hex_material();
+              time2 = 0;
+          };
          }
 
          // var planx = new THREE.Mesh( geo, new THREE.MeshBasicMaterial);
