@@ -15,6 +15,8 @@ var time2=0;
 var currentCityTextMesh; 
 var currentCityText;
 
+var ctrlx, ctrly, ctrlz;
+
  // City and weather API set up code snippet from https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/ needs more adjustments
           cityWeather = {},
           cityTimes = [],
@@ -165,6 +167,9 @@ var loadWorld = function(){
           if (time2 < 4){time2++}
             else if (time2 == 4){ 
             socket.emit('lookat', 'Paris');
+            player.position.x = 30;
+            player.position.z = 30;
+            updatePlayerData();
             time2 = 0;
           };
 
@@ -197,6 +202,9 @@ var loadWorld = function(){
             if (time2 < 4){time2++}
             else if (time2 == 4){ 
             socket.emit('lookat', 'Tokio');
+            player.position.x = -30;
+            player.position.z = -30;
+            updatePlayerData();
              //this.material = reticle.get_random_hex_material();
                time2 = 0;
           };
@@ -228,6 +236,9 @@ var loadWorld = function(){
           if (time2 < 4){time2++}
             else if (time2 == 4){ 
             socket.emit('lookat', 'Turquia');
+            player.position.x = 60;
+            player.position.z = 60;
+            updatePlayerData();
              //this.material = reticle.get_random_hex_material();
                 time2 = 0;
           };
@@ -259,6 +270,9 @@ var loadWorld = function(){
            if (time2 < 4){time2++}
             else if (time2 == 4){  
             socket.emit('lookat', 'Republica Dominicana');
+            player.position.x = -60;
+            player.position.z = -60;
+            updatePlayerData();
              //this.material = reticle.get_random_hex_material();
                  time2 = 0;
           };
@@ -289,6 +303,10 @@ var loadWorld = function(){
             if (time2 < 4){time2++}
             else if (time2 == 4){ 
             socket.emit('lookat', 'New York');
+             player.position.x = 90;
+            player.position.z = -90;
+            updatePlayerData();
+
              //this.material = reticle.get_random_hex_material();
                    time2 = 0;
           };
@@ -320,6 +338,9 @@ var loadWorld = function(){
             if (time2 < 4){time2++}
             else if (time2 == 4){ 
             socket.emit('lookat', 'Argentina');
+            player.position.x = -90;
+            player.position.z = 90;
+            updatePlayerData();
              //this.material = reticle.get_random_hex_material();
               time2 = 0;
           };
@@ -598,7 +619,7 @@ function animation() {
        checkKeyStates();
        animation();   
       // Update VR headset position and apply to camera.
-      controls.update();
+      controls.update(ctrlx, ctrly, ctrlz);
 
       // Render the scene.
       effect.render(scene, camera);
@@ -991,6 +1012,10 @@ var createPlayer = function(data){
     moveSpeed = data.speed;
     turnSpeed = data.turnSpeed;
 
+    ctrlx = player.position.x;
+    ctrly = player.position.y;
+    ctrlz = player.position.z;
+
     updateCameraPosition();
 
     objects.push( player );
@@ -1029,6 +1054,10 @@ var updatePlayerData = function(){
     playerData.r_x = player.rotation.x;
     playerData.r_y = player.rotation.y;
     playerData.r_z = player.rotation.z;
+
+    ctrlx = player.position.x;
+    ctrly = player.position.y;
+    ctrlz = player.position.z;
 
 };
 
