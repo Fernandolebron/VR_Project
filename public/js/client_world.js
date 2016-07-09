@@ -10,7 +10,10 @@ var plan=[];
 var homecubes=[];
 // Apply VR headset positional data to camera.
 var time = new Date();
-var time2= 0; 
+var time2=0; 
+
+var currentCityTextMesh; 
+var currentCityText;
 
  // City and weather API set up code snippet from https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/ needs more adjustments
           cityWeather = {},
