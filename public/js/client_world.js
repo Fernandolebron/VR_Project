@@ -7,9 +7,18 @@ var playerData;
 var sky, scene, renderer, camera, effect, sphere, reticle;
 var otherPlayers = [], otherPlayersId = [];
 var plan=[];
+var homecubes=[];
 // Apply VR headset positional data to camera.
 var time = new Date();
 var time2= 0; 
+
+ // City and weather API set up code snippet from https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/ needs more adjustments
+          cityWeather = {},
+          cityTimes = [],
+          currentCity = 0,
+          currentCityText = new THREE.TextGeometry(),
+          currentCityTextMesh = new THREE.Mesh();
+          cities = ['Paris', 'London', 'Tokio', 'New York', 'Santo Domingo', 'Turkey'];
 
 var loadWorld = function(){
 
@@ -74,6 +83,8 @@ var loadWorld = function(){
         var Mat4 = [];
         var Mat5 = [];
         var Mat6 = [];
+        var GoBack = [];
+
 
         Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/Paris/paris.png')} ));
         Mat1.push(new THREE.MeshBasicMaterial( { map: load.load('images/Paris/paris.png')} ));
@@ -116,7 +127,15 @@ var loadWorld = function(){
         Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres/londres.png')} ));
         Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londes/londres.png')} ));
         Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londes/londres.png')} ));
-         
+        
+
+        GoBack.push(new THREE.MeshBasicMaterial( { map: load.load('images/menu/home.png')} ));
+        GoBack.push(new THREE.MeshBasicMaterial( { map: load.load('images/menu/home.png')} ));
+        GoBack.push(new THREE.MeshBasicMaterial( { map: load.load('images/menu/home.png')} ));
+        GoBack.push(new THREE.MeshBasicMaterial( { map: load.load('images/menu/home.png')} ));
+        GoBack.push(new THREE.MeshBasicMaterial( { map: load.load('images/menu/home.png')} ));
+        GoBack.push(new THREE.MeshBasicMaterial( { map: load.load('images/menu/home.png')} ));
+
         plan[0] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat1));
         plan[1] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat2));
         plan[2] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat3));
@@ -124,14 +143,23 @@ var loadWorld = function(){
         plan[4] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat5));
         plan[5] = new THREE.Mesh(geo,new THREE.MeshFaceMaterial(Mat6));
 
+        homecubes[0] = new THREE.Mesh(geo, new THREE.MeshFaceMaterial(GoBack));
+        homecubes[1] = new THREE.Mesh(geo, new THREE.MeshFaceMaterial(GoBack));
+        homecubes[2] = new THREE.Mesh(geo, new THREE.MeshFaceMaterial(GoBack));
+        homecubes[3] = new THREE.Mesh(geo, new THREE.MeshFaceMaterial(GoBack));
+        homecubes[4] = new THREE.Mesh(geo, new THREE.MeshFaceMaterial(GoBack));
+        homecubes[5] = new THREE.Mesh(geo, new THREE.MeshFaceMaterial(GoBack));
       
-
         //create gaze interaction manager
          //var reticle = vreticle.Reticle(camera);
          
          
          plan[0].ongazelong = function(){
             socket.emit('lookat', 'Paris');
+            player.position.x = 30;
+            player.position.z = 30;
+           // displayCurrentCityName(cities[0]);
+            updatePlayerData();
             TheWorldTime( 48.856, 2.352);
              //this.material = reticle.get_random_hex_material();
          }
@@ -150,6 +178,10 @@ var loadWorld = function(){
 
           plan[1].ongazelong = function(){
             socket.emit('lookat', 'Tokio');
+            player.position.x = -30;
+            player.position.z = -30;
+            updatePlayerData();
+
             TheWorldTime(35.689, 139.691);
              //this.material = reticle.get_random_hex_material();
          }
@@ -168,6 +200,10 @@ var loadWorld = function(){
 
          plan[2].ongazelong = function(){
             socket.emit('lookat', 'Turquia');
+            player.position.x = 60;
+            player.position.z = 60;
+            updatePlayerData();
+
             TheWorldTime( 38.962, 35.2412);
              //this.material = reticle.get_random_hex_material();
          }
@@ -186,6 +222,10 @@ var loadWorld = function(){
 
           plan[3].ongazelong = function(){
             socket.emit('lookat', 'Republica Dominicana');
+            player.position.x = -60;
+            player.position.z = -60;
+            updatePlayerData();
+
             TheWorldTime( 18.500, -69.988);
              //this.material = reticle.get_random_hex_material();
          }
@@ -204,6 +244,10 @@ var loadWorld = function(){
 
           plan[4].ongazelong = function(){
             socket.emit('lookat', 'New York');
+            player.position.x = 90;
+            player.position.z = -90;
+            updatePlayerData();
+
             TheWorldTime( 40.712, -74.005);
              //this.material = reticle.get_random_hex_material();
          }
@@ -222,6 +266,10 @@ var loadWorld = function(){
 
           plan[5].ongazelong = function(){
             socket.emit('lookat', 'Londres');
+            player.position.x = -90;
+            player.position.z = 90;
+            updatePlayerData();
+
             TheWorldTime( 51.509, -0.126);
              //this.material = reticle.get_random_hex_material();
          }
@@ -251,6 +299,219 @@ var loadWorld = function(){
 
             scene.add(plan[i]); 
         };
+/*
+         for(var j = 0; i < 6; i ++){
+            reticle.add_collider(homecubes[i])
+
+            homecubes[i].position.z = -60;
+            homecubes[i].position.y = 0.5;
+            homecubes[i].position.x = (i * 10) + (i + 30);
+        }
+*/
+
+    reticle.add_collider(homecubes[0]);
+    homecubes[0].position.x = 30;
+    homecubes[0].position.y = 5;
+    homecubes[0].position.z = 30;
+    scene.add(homecubes[0]);
+
+    reticle.add_collider(homecubes[1]);
+    homecubes[1].position.x = -30;
+    homecubes[1].position.y = 5;
+    homecubes[1].position.z = -30;
+    scene.add(homecubes[1]);
+
+    reticle.add_collider(homecubes[2]);
+    homecubes[2].position.x = 60;
+    homecubes[2].position.y = 5;
+    homecubes[2].position.z = 60;
+    scene.add(homecubes[2]);
+
+    reticle.add_collider(homecubes[3]);
+    homecubes[3].position.x = -60;
+    homecubes[3].position.y = 5;
+    homecubes[3].position.z = -60;
+    scene.add(homecubes[3]);
+
+    reticle.add_collider(homecubes[4]);
+    homecubes[4].position.x = 90;
+    homecubes[4].position.y = 5;
+    homecubes[4].position.z = -90;
+    scene.add(homecubes[4]);
+
+    reticle.add_collider(homecubes[5]);
+    homecubes[5].position.x = -90;
+    homecubes[5].position.y = 5;
+    homecubes[5].position.z = 90;
+    scene.add(homecubes[5]);
+
+    
+
+    /*********************************************************
+    *                                                        * 
+    *                  Code provided in class                *   
+    *                                                        * 
+    *********************************************************/
+    var clock;
+
+// Particles
+var particles = new THREE.Object3D(),
+  totalParticles = 200,
+  maxParticleSize = 200,
+  particleRotationSpeed = 0,
+  particleRotationDeg = 0,
+  lastColorRange = [0, 0.3],
+  currentColorRange = [0, 0.3],
+
+clock = new THREE.Clock();
+  
+function getURL(url, callback) {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4) {
+       if (xmlhttp.status == 200){
+           callback(JSON.parse(xmlhttp.responseText));
+       }
+       else {
+           console.log('We had an error, status code: ', xmlhttp.status);
+       }
+    }
+  }
+  xmlhttp.open('GET', url, true);
+  xmlhttp.send();
+}
+
+var particleTexture = THREE.ImageUtils.loadTexture('textures/particle.png'),
+  spriteMaterial = new THREE.SpriteMaterial({
+  map: particleTexture,
+  color: 0xffffff
+});
+
+for (var i = 0; i < totalParticles; i++) {
+  var sprite = new THREE.Sprite(spriteMaterial);
+  sprite.scale.set(64, 64, 1.0);
+  sprite.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.75);
+  sprite.position.setLength(maxParticleSize * Math.random());
+  sprite.material.blending = THREE.AdditiveBlending;
+          
+  particles.add(sprite);
+}
+
+particles.position.y = 70;
+scene.add(particles);
+
+
+ function adjustToWeatherConditions() {
+    var cityIDs = '';
+    for (var i = 0; i < cities.length; i++) {
+      cityIDs += cities[i][1];
+      if (i != cities.length - 1) cityIDs += ',';
+    }
+
+    // Replace with real API id.
+    getURL('http://api.openweathermap.org/data/2.5/group?id=' + cityIDs + '&APPID=d447b3f167725172e64ca9096871d7c5', function(info) {
+      cityWeather = info.list;
+      
+      lookupTimezones(0, cityWeather.length);
+    });
+}
+
+function lookupTimezones(t, len) {
+    var tz = new TimeZoneDB;
+    
+    tz.getJSON({
+        key: "D8RGXM6K480Q", // TODO: Use real key
+        lat: cityWeather[t].coord.lat,
+        lng: cityWeather[t].coord.lon
+    }, function(timeZone){
+        cityTimes.push(new Date(timeZone.timestamp * 1000));
+        t++;
+        if (t < len) {
+          setTimeout(function() {
+            lookupTimezones(t, len);
+          }, 1200);
+        } else {
+          applyWeatherConditions();
+        }
+    });
+}
+
+function applyWeatherConditions() {
+    
+    // TODO: Maybe display the city name here
+    
+    var info = cityWeather[currentCity];
+    particleRotationSpeed = info.wind.speed / 2; // dividing by 2 just to slow things down 
+    particleRotationDeg = info.wind.deg;
+
+    var timeThere = cityTimes[currentCity] ? cityTimes[currentCity].getUTCHours() : 0,
+        isDay = timeThere >= 6 && timeThere <= 18;
+
+    if (isDay) {
+      switch (info.weather[0].main) {
+        case 'Clouds':
+          currentColorRange = [0, 0.01];
+          break;
+        case 'Rain':
+          currentColorRange = [0.7, 0.1];
+          break;
+        case 'Clear':
+        default:
+          currentColorRange = [0.6, 0.7];
+          break;
+      }
+    } else {
+      currentColorRange = [0.69, 0.6];
+    }
+
+    if (currentCity < cities.length-1) currentCity++;
+    else currentCity = 0;
+    setTimeout(applyWeatherConditions, 5000);
+}
+
+ function displayCurrentCityName(name) {  // code snippet sacado del siguiente tutorial https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/
+        scene.remove(currentCityTextMesh);
+
+        currentCityText = new THREE.TextGeometry(name, {
+          size: 4,
+          height: 1
+        });
+        currentCityTextMesh = new THREE.Mesh(currentCityText, new THREE.MeshBasicMaterial({
+          color: 0xffffff, opacity: 1
+        }));
+
+        currentCityTextMesh.position.y = 10;
+        currentCityTextMesh.position.z = 20;
+        currentCityTextMesh.rotation.x = 0;
+        currentCityTextMesh.rotation.y = -180;
+
+        scene.add(currentCityTextMesh);
+      }
+
+function animation() {
+  var elapsedSeconds = clock.getElapsedTime(),
+      particleRotationDirection = particleRotationDeg <= 180 ? -1 : 1;
+    
+  particles.rotation.y = elapsedSeconds * particleRotationSpeed * particleRotationDirection;
+        
+  // We check if the color range has changed, if so, we'll change the colours
+  if (lastColorRange[0] != currentColorRange[0] && lastColorRange[1] != currentColorRange[1]) {
+    for (var i = 0; i < totalParticles; i++) {
+      particles.children[i].material.color.setHSL(currentColorRange[0], currentColorRange[1], (Math.random() * (0.7 - 0.2) + 0.2));
+    }
+      
+    lastColorRange = currentColorRange;
+  }
+  
+  //requestAnimationFrame(animate); // TODO: This will add the animations to the main loop, if you have it somewhere else just call animate
+  // TODO: Add update code if necessary here
+}
+
+    /*********************************************************
+    *                                                        * 
+    *                  End of code                           *   
+    *                                                        * 
+    *********************************************************/
 
          //reticle.reticle_loop();
 
@@ -272,7 +533,8 @@ var loadWorld = function(){
         for (var j = 0; j < 6; j++) {
             plan[j].rotation.y +=0.002;
         };
-
+       checkKeyStates();
+       animation();   
       // Update VR headset position and apply to camera.
       controls.update();
 
@@ -385,7 +647,7 @@ function TheWorldWeather(latitude, longitude){
             url: url,
         }).done(function(response) {
            // nd = response.
-            alert("The weather is " + response.name + ".");
+            alert("The weather in " + response.name + " is " +response.weather[1]+ ".");
                        
         });
 }
@@ -431,7 +693,7 @@ function TheWorldWeather(latitude, longitude){
        sky = new THREE.Sky();
        scene.add( sky.mesh );
 
-      TheWorldWeather( 51.509, -0.126);
+     // TheWorldWeather( 51.509, -0.126);
 
       // Add Sun Helper
       sunSphere = new THREE.Mesh(
