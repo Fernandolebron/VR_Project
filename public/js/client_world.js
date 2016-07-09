@@ -168,7 +168,7 @@ var loadWorld = function(){
             time2 = 0;
           };
 
-            displayCurrentCityName('Paris')
+            displayCurrentCityName('Paris');
             
              //this.material = reticle.get_random_hex_material();
          }
@@ -180,7 +180,7 @@ var loadWorld = function(){
                time2 = 0;
           };
              //this.material = reticle.get_random_hex_material();
-              displayCurrentCityName('Paris')
+              displayCurrentCityName('Paris');
          }
 
          plan[0].ongazeout = function(){
@@ -190,7 +190,7 @@ var loadWorld = function(){
               time2 = 0;
           };
             // this.material = reticle.default_material();
-             displayCurrentCityName('Paris')
+             displayCurrentCityName('Paris');
          }
 
           plan[1].ongazelong = function(){
@@ -200,6 +200,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                time2 = 0;
           };
+          displayCurrentCityName('Tokio');
 
          }
 
@@ -210,6 +211,7 @@ var loadWorld = function(){
                time2 = 0;
           };
              //this.material = reticle.get_random_hex_material();
+             displayCurrentCityName('Tokio');
          }
 
          plan[1].ongazeout = function(){
@@ -219,6 +221,7 @@ var loadWorld = function(){
               time2 = 0;
           };
             // this.material = reticle.default_material();
+            displayCurrentCityName('Tokio');
          }
 
          plan[2].ongazelong = function(){
@@ -228,6 +231,8 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                 time2 = 0;
           };
+
+          displayCurrentCityName('Turquia');
          }
 
          plan[2].ongazeover = function(){
@@ -237,6 +242,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                 time2 = 0;
           };
+          displayCurrentCityName('Turquia');
          }
 
          plan[2].ongazeout = function(){
@@ -246,6 +252,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                 time2 = 0;
           };
+          displayCurrentCityName('Turquia');
          }
 
           plan[3].ongazelong = function(){
@@ -255,6 +262,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                  time2 = 0;
           };
+          displayCurrentCityName('Republica Dominicana');
          }
 
          plan[3].ongazeover = function(){
@@ -264,6 +272,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                  time2 = 0;
           };
+          displayCurrentCityName('Republica Dominicana');
          }
 
          plan[3].ongazeout = function(){
@@ -273,6 +282,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                  time2 = 0;
           };
+          displayCurrentCityName('Republica Dominicana');
          }
 
           plan[4].ongazelong = function(){
@@ -282,6 +292,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                    time2 = 0;
           };
+          displayCurrentCityName('New York');
          }
 
          plan[4].ongazeover = function(){
@@ -291,6 +302,8 @@ var loadWorld = function(){
             //this.material = reticle.get_random_hex_material();
             time2 = 0;
           };
+          displayCurrentCityName('New York');
+
          }
 
          plan[4].ongazeout = function(){
@@ -300,6 +313,7 @@ var loadWorld = function(){
             //this.material = reticle.get_random_hex_material();
             time2 = 0;
           };
+          displayCurrentCityName('New York');
          }
 
           plan[5].ongazelong = function(){
@@ -318,6 +332,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
               time2 = 0;
           };
+          displayCurrentCityName('Argentina');
          }
 
 
@@ -328,6 +343,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
               time2 = 0;
           };
+           displayCurrentCityName('Argentina');
          }
 
          // var planx = new THREE.Mesh( geo, new THREE.MeshBasicMaterial);
@@ -513,24 +529,24 @@ function applyWeatherConditions() {
     setTimeout(applyWeatherConditions, 5000);
 }
 
- function displayCurrentCityName(name) {  // code snippet sacado del siguiente tutorial https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/
-        scene.remove(currentCityTextMesh);
+ // function displayCurrentCityName(name) {  // code snippet sacado del siguiente tutorial https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/
+ //        scene.remove(currentCityTextMesh);
 
-        currentCityText = new THREE.TextGeometry(name, {
-          size: 4,
-          height: 1
-        });
-        currentCityTextMesh = new THREE.Mesh(currentCityText, new THREE.MeshBasicMaterial({
-          color: 0xffffff, opacity: 1
-        }));
+ //        currentCityText = new THREE.TextGeometry(name, {
+ //          size: 4,
+ //          height: 1
+ //        });
+ //        currentCityTextMesh = new THREE.Mesh(currentCityText, new THREE.MeshBasicMaterial({
+ //          color: 0xffffff, opacity: 1
+ //        }));
 
-        currentCityTextMesh.position.y = 10;
-        currentCityTextMesh.position.z = 20;
-        currentCityTextMesh.rotation.x = 0;
-        currentCityTextMesh.rotation.y = -180;
+ //        currentCityTextMesh.position.y = 10;
+ //        currentCityTextMesh.position.z = 20;
+ //        currentCityTextMesh.rotation.x = 0;
+ //        currentCityTextMesh.rotation.y = -180;
 
-        scene.add(currentCityTextMesh);
-      }
+ //        scene.add(currentCityTextMesh);
+ //      }
 
 function animation() {
   var elapsedSeconds = clock.getElapsedTime(),
@@ -689,27 +705,27 @@ function displayCurrentCityName(name) {  // code snippet sacado del siguiente tu
 
         var textloader = new THREE.FontLoader();
 
-        textloader.load('font/AdobeGothicStd-Bold.otf', function (font){
+        textloader.load('font/texto.js', function (font){
 
         currentCityText = new THREE.TextGeometry(name, {
           size: 4,
           height: 1,
           curveSegments: 3,
-          font: font,
-          weight: 'normal',
-          bevelThickness: 3,
-          bevelSize: 3,
-          bevelEnabled: true
+          font: font
+          // weight: 'normal',
+          // bevelThickness: 3,
+          // bevelSize: 3,
+          // bevelEnabled: true
         });
         
-      currentCityTextMesh = new THREE.Mesh(currentCityText, new THREE.MeshBasicMaterial({ color: 0xffffff, opacity: 1}));
+      currentCityTextMesh = new THREE.Mesh(currentCityText, new THREE.MeshBasicMaterial({ color: 0xAA3939, opacity: 1}));
 
-        currentCityTextMesh.position.y = 0.5;
-        currentCityTextMesh.position.z = -20;
+        currentCityTextMesh.position.y = 4;
         currentCityTextMesh.position.z = -10;
+       // currentCityTextMesh.position.x = -10;
         
         currentCityTextMesh.rotation.x = 0;
-        currentCityTextMesh.rotation.y = -180;
+        currentCityTextMesh.rotation.y = 0;
 
         scene.add(currentCityTextMesh);
         });     
