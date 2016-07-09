@@ -639,6 +639,40 @@ function animation() {
         });
     }
 
+///---------------------------------------///
+function displayCurrentCityName(name) {  // code snippet sacado del siguiente tutorial https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/
+        scene.remove(currentCityTextMesh);
+
+        var textloader = new THREE.FontLoader();
+
+        textloader.load('font/AdobeGothicStd-Bold.otf', function (font){
+
+        currentCityText = new THREE.TextGeometry(name, {
+          size: 4,
+          height: 1,
+          curveSegments: 3,
+          font: font,
+          weight: 'normal',
+          bevelThickness: 3,
+          bevelSize: 3,
+          bevelEnabled: true
+        });
+        
+      currentCityTextMesh = new THREE.Mesh(currentCityText, new THREE.MeshBasicMaterial({ color: 0xffffff, opacity: 1}));
+
+        currentCityTextMesh.position.y = 0.5;
+        currentCityTextMesh.position.z = -20;
+        currentCityTextMesh.position.z = -10;
+        
+        currentCityTextMesh.rotation.x = 0;
+        currentCityTextMesh.rotation.y = -180;
+
+        scene.add(currentCityTextMesh);
+        });     
+      }
+
+
+///------------------------------------////
 
 function TheWorldWeather(latitude, longitude){
 
