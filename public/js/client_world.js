@@ -304,7 +304,7 @@ var loadWorld = function(){
             reticle.add_collider(homecubes[i])
 
             homecubes[i].position.z = -60;
-            homecubes[i].position.y = 0.5;
+            homecubes[i].position.y = 5;
             homecubes[i].position.x = (i * 10) + (i + 30);
         }
 */
@@ -647,7 +647,7 @@ function TheWorldWeather(latitude, longitude){
             url: url,
         }).done(function(response) {
            // nd = response.
-            alert("The weather in " + response.name + " is " +response.weather[1]+ ".");
+            alert("The weather in " + response.name + " is " +response.weather+ ".");
                        
         });
 }
