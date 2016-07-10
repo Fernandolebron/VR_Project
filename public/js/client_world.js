@@ -367,6 +367,54 @@ var loadWorld = function(){
            displayCurrentCityName('Argentina');
          }
 
+    homecubes[0].ongazelong = function(){
+            player.position.x = 0;
+            player.position.z = 0;
+            updatePlayerData();
+        }
+    homecubes[0].ongazeover = function(){}
+    homecubes[0].ongazeout = function(){}
+
+    homecubes[1].ongazelong = function(){
+            player.position.x = 0;
+            player.position.z = 0;
+            updatePlayerData();
+        }
+    homecubes[1].ongazeover = function(){}
+    homecubes[1].ongazeout = function(){}
+
+    homecubes[2].ongazelong = function(){
+            player.position.x = 0;
+            player.position.z = 0;
+            updatePlayerData();
+        }
+    homecubes[2].ongazeover = function(){}
+    homecubes[2].ongazeout = function(){}
+
+    homecubes[3].ongazelong = function(){
+            player.position.x = 0;
+            player.position.z = 0;
+            updatePlayerData();
+    }
+    homecubes[3].ongazeover = function(){}
+    homecubes[3].ongazeout = function(){}
+
+    homecubes[4].ongazelong = function(){
+            player.position.x = 0;
+            player.position.z = 0;
+            updatePlayerData();
+        }
+    homecubes[4].ongazeover = function(){}
+    homecubes[4].ongazeout = function(){}
+
+    homecubes[5].ongazelong = function(){
+            player.position.x = 0;
+            player.position.z = 0;
+            updatePlayerData();
+        }
+    homecubes[5].ongazeover = function(){}
+    homecubes[5].ongazeout = function(){}
+
          // var planx = new THREE.Mesh( geo, new THREE.MeshBasicMaterial);
         for (var i = 0; i < 6; i++) {
 
