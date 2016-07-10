@@ -12,8 +12,8 @@ var homecubes=[];
 var time = new Date();
 var time2=0; 
 
-var currentCityTextMesh; 
 var currentCityText;
+var currentCityTextMesh; 
 
 var ctrlx=0; 
 var ctrly=5;
@@ -23,7 +23,7 @@ var ctrlz=0;
          //  cityWeather = {},
          //  cityTimes = [],
          //  currentCity = 0,
-         //  currentCityText = new THREE.TextGeometry(),
+         // currentCityText = new THREE.TextGeometry(),
          // currentCityTextMesh = new THREE.Mesh();
          //  cities = ['Paris', 'London', 'Tokio', 'New York', 'Santo Domingo', 'Turkey'];
 
@@ -176,26 +176,12 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
          }
 
-         plan[0].ongazeover = function(){
-          if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-             socket.emit('lookat', 'Paris');
-               time2 = 0;
-          };
-             //this.material = reticle.get_random_hex_material();
-             // displayCurrentCityName('Paris');
+         plan[0].ongazeover = function(){}
 
-         }
 
          plan[0].ongazeout = function(){
-          if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Paris');
-              time2 = 0;
-          };
-            // this.material = reticle.default_material();
-            scene.remove(currentCityTextMesh);
-         }
+                     scene.remove(currentCityTextMesh);
+            }
 
           plan[1].ongazelong = function(){
             if (time2 < 4){time2++}
@@ -208,25 +194,12 @@ var loadWorld = function(){
 
          }
 
-         plan[1].ongazeover = function(){
-          if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-             socket.emit('lookat', 'Tokio');
-               time2 = 0;
-          };
-             //this.material = reticle.get_random_hex_material();
-             ///displayCurrentCityName('Tokio');
-         }
+         plan[1].ongazeover = function(){}
+
 
          plan[1].ongazeout = function(){
-         if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Tokio');
-              time2 = 0;
-          };
-            // this.material = reticle.default_material();
-            scene.remove(currentCityTextMesh);
-         }
+                     scene.remove(currentCityTextMesh);
+            }
 
          plan[2].ongazelong = function(){
           if (time2 < 4){time2++}
@@ -239,25 +212,12 @@ var loadWorld = function(){
           displayCurrentCityName('Turquia');
          }
 
-         plan[2].ongazeover = function(){
-          if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Turquia');
-             //this.material = reticle.get_random_hex_material();
-                time2 = 0;
-          };
-          //displayCurrentCityName('Turquia');
-         }
+         plan[2].ongazeover = function(){}
+
 
          plan[2].ongazeout = function(){
-          if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Turquia');
-             //this.material = reticle.get_random_hex_material();
-                time2 = 0;
-          };
-            scene.remove(currentCityTextMesh);
-         }
+                     scene.remove(currentCityTextMesh);
+            }
 
           plan[3].ongazelong = function(){
            if (time2 < 4){time2++}
@@ -269,26 +229,12 @@ var loadWorld = function(){
           displayCurrentCityName('Republica Dominicana');
          }
 
-         plan[3].ongazeover = function(){
-           if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Republica Dominicana');
-             //this.material = reticle.get_random_hex_material();
-                 time2 = 0;
-          };
-         // displayCurrentCityName('Republica Dominicana');
-         }
+         plan[3].ongazeover = function(){}
+
 
          plan[3].ongazeout = function(){
-            if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Republica Dominicana');
-             //this.material = reticle.get_random_hex_material();
-                 time2 = 0;
-          };
-          
-          scene.remove(currentCityTextMesh);
-         }
+             scene.remove(currentCityTextMesh);
+            }
 
           plan[4].ongazelong = function(){
             if (time2 < 4){time2++}
@@ -300,28 +246,12 @@ var loadWorld = function(){
           displayCurrentCityName('New York');
          }
 
-         plan[4].ongazeover = function(){
-           if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'New York');
-            //this.material = reticle.get_random_hex_material();
-            time2 = 0;
-          };
-          //displayCurrentCityName('New York');
+         plan[4].ongazeover = function(){}
 
-         }
 
          plan[4].ongazeout = function(){
-          if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'New York');
-            //this.material = reticle.get_random_hex_material();
-            time2 = 0;
-          };
-          
-          scene.remove(currentCityTextMesh);
-
-         }
+             scene.remove(currentCityTextMesh);
+            }
 
           plan[5].ongazelong = function(){
             if (time2 < 4){time2++}
@@ -333,28 +263,13 @@ var loadWorld = function(){
           displayCurrentCityName('Argentina');
          }
 
-         plan[5].ongazeover = function(){
-             if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Argentina');
-             //this.material = reticle.get_random_hex_material();
-              time2 = 0;
-          };
-          
-
-         }
+         plan[5].ongazeover = function(){}
 
 
          plan[5].ongazeout = function(){
-               if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Argentina');
-             //this.material = reticle.get_random_hex_material();
-              time2 = 0;
-          };
-           scene.remove(currentCityTextMesh);
-        
-         }
+                     scene.remove(currentCityTextMesh);
+            }
+
         for (var i = 0; i < 6; i++) {
 
           reticle.add_collider(plan[i])
@@ -423,44 +338,54 @@ var loadWorld = function(){
     homecubes[5].ongazeout = function(){}
 
 
-    reticle.add_collider(homecubes[0]);
-    homecubes[0].position.x = 30;
+      reticle.add_collider(homecubes[0]);
+      homecubes[0].position.x = 30;
     homecubes[0].position.y = 5;
-    homecubes[0].position.z = 30;
-    scene.add(homecubes[0]);
-
-    reticle.add_collider(homecubes[1]);
-    homecubes[1].position.x = -30;
-    homecubes[1].position.y = 5;
-    homecubes[1].position.z = -30;
-    scene.add(homecubes[1]);
-
-    reticle.add_collider(homecubes[2]);
-    homecubes[2].position.x = 60;
-    homecubes[2].position.y = 5;
-    homecubes[2].position.z = 60;
-    scene.add(homecubes[2]);
-
-    reticle.add_collider(homecubes[3]);
-    homecubes[3].position.x = -60;
-    homecubes[3].position.y = 5;
-    homecubes[3].position.z = -60;
-    scene.add(homecubes[3]);
-
-    reticle.add_collider(homecubes[4]);
-    homecubes[4].position.x = 90;
+   homecubes[0].position.y = 1;
+      homecubes[0].position.z = 30;
+      scene.add(homecubes[0]);
+  
+      reticle.add_collider(homecubes[1]);
+      homecubes[1].position.x = -30;
+     homecubes[1].position.y = 5;
+     homecubes[1].position.y = 1;
+      homecubes[1].position.z = -30;
+      scene.add(homecubes[1]);
+  
+      reticle.add_collider(homecubes[2]);
+      homecubes[2].position.x = 60;
+     homecubes[2].position.y = 5;
+     homecubes[2].position.y = 1;
+      homecubes[2].position.z = 60;
+      scene.add(homecubes[2]);
+  
+      reticle.add_collider(homecubes[3]);
+      homecubes[3].position.x = -60;
+     homecubes[3].position.y = 5;
+     homecubes[3].position.y = 1;
+      homecubes[3].position.z = -60;
+      scene.add(homecubes[3]);
+  
+      reticle.add_collider(homecubes[4]);
+      homecubes[4].position.x = 90;
     homecubes[4].position.y = 5;
-    homecubes[4].position.z = -90;
-    scene.add(homecubes[4]);
+     homecubes[4].position.y = 1;
+      homecubes[4].position.z = -90;
+      scene.add(homecubes[4]);
+  
+      reticle.add_collider(homecubes[5]);
+      homecubes[5].position.x = -90;
+     homecubes[5].position.y = 5;
+     homecubes[5].position.y = 1;
+      homecubes[5].position.z = 90;
+      scene.add(homecubes[5]);
 
-    reticle.add_collider(homecubes[5]);
-    homecubes[5].position.x = -90;
-    homecubes[5].position.y = 5;
-    homecubes[5].position.z = 90;
-    scene.add(homecubes[5]);
+      //playerData.r_z = player.rotation.z;
 
-    
-
+      ctrlx = player.position.x;
+      ctrly = player.position.y;
+      ctrly = player.position.y + 5;
+      ctrlz = player.position.z;
     /*********************************************************
     *                                                        * 
     *                  Code provided in class                *   
@@ -778,12 +703,11 @@ function displayCurrentCityName(name) {  // code snippet sacado del siguiente tu
           
           font: font
         });
-            currentCityTextMesh = new THREE.Mesh(currentCityText, new THREE.MeshBasicMaterial({ color: 0xAA3939, opacity: 1}));
+        
+        currentCityTextMesh = new THREE.Mesh(currentCityText, new THREE.MeshBasicMaterial({ color: 0xAA3939, opacity: 1}));
 
         currentCityTextMesh.position.y = 4;
-        currentCityTextMesh.position.z = -10;
-       // currentCityTextMesh.position.x = -10;
-        
+        currentCityTextMesh.position.z = -10;    
         currentCityTextMesh.rotation.x = 0;
         currentCityTextMesh.rotation.y = 0;
 
@@ -1007,6 +931,7 @@ function displayCurrentCityName(name) {  // code snippet sacado del siguiente tu
 }
 
 
+
 ///----------------------------------------------------------///
 
 
@@ -1034,10 +959,6 @@ var createPlayer = function(data){
     playerId = data.playerId;
     moveSpeed = data.speed;
     turnSpeed = data.turnSpeed;
-
-    ctrlx = player.position.x;
-    ctrly = player.position.y + 5;
-    ctrlz = player.position.z;
 
     updateCameraPosition();
 
@@ -1077,10 +998,6 @@ var updatePlayerData = function(){
     playerData.r_x = player.rotation.x;
     playerData.r_y = player.rotation.y;
     playerData.r_z = player.rotation.z;
-
-    ctrlx = player.position.x;
-    ctrly = player.position.y;
-    ctrlz = player.position.z;
 
 };
 
