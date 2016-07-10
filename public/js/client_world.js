@@ -15,7 +15,9 @@ var time2=0;
 var currentCityTextMesh; 
 var currentCityText;
 
-var ctrlx, ctrly, ctrlz;
+var ctrlx=0; 
+var ctrly=5;
+var ctrlz=0;
 
  // City and weather API set up code snippet from https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/ needs more adjustments
           cityWeather = {},
@@ -1059,7 +1061,7 @@ var createPlayer = function(data){
     turnSpeed = data.turnSpeed;
 
     ctrlx = player.position.x;
-    ctrly = player.position.y;
+    ctrly = player.position.y + 5;
     ctrlz = player.position.z;
 
     updateCameraPosition();
