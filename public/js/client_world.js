@@ -15,6 +15,9 @@ var time2=0;
 var currentCityTextMesh; 
 var currentCityText;
 
+var currentCityTextMesh2; 
+var currentCityText2;
+
 var ctrlx=0; 
 var ctrly=5;
 var ctrlz=0;
@@ -176,29 +179,13 @@ var loadWorld = function(){
           };
 
             displayCurrentCityName('Paris');
-            
+            WorldTime(48.856,2.352);
              //this.material = reticle.get_random_hex_material();
          }
 
-         plan[0].ongazeover = function(){
-          if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-             socket.emit('lookat', 'Paris');
-               time2 = 0;
-          };
-             //this.material = reticle.get_random_hex_material();
-         
-         }
+         plan[0].ongazeover = function(){}
 
-         plan[0].ongazeout = function(){
-          if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Paris');
-              time2 = 0;
-          };
-            // this.material = reticle.default_material();
-      
-         }
+         plan[0].ongazeout = function(){}
 
           plan[1].ongazelong = function(){
             if (time2 < 4){time2++}
@@ -211,28 +198,12 @@ var loadWorld = function(){
                time2 = 0;
           };
           displayCurrentCityName('Tokio');
+          WorldTime(35.689,139.691);
 
          }
+        plan[1].ongazeover = function(){}
 
-         plan[1].ongazeover = function(){
-          if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-             socket.emit('lookat', 'Tokio');
-               time2 = 0;
-          };
-             //this.material = reticle.get_random_hex_material();
-       
-         }
-
-         plan[1].ongazeout = function(){
-         if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Tokio');
-              time2 = 0;
-          };
-            // this.material = reticle.default_material();
-         
-         }
+         plan[1].ongazeout = function(){}
 
          plan[2].ongazelong = function(){
           if (time2 < 4){time2++}
@@ -246,27 +217,11 @@ var loadWorld = function(){
           };
 
           displayCurrentCityName('Turquia');
-         }
+          WorldTime(35.689,139.691);
+         } 
+         plan[2].ongazeover = function(){}
 
-         plan[2].ongazeover = function(){
-          if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Turquia');
-             //this.material = reticle.get_random_hex_material();
-                time2 = 0;
-          };
-        
-         }
-
-         plan[2].ongazeout = function(){
-          if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Turquia');
-             //this.material = reticle.get_random_hex_material();
-                time2 = 0;
-          };
-    
-         }
+         plan[2].ongazeout = function(){}
 
           plan[3].ongazelong = function(){
            if (time2 < 4){time2++}
@@ -279,27 +234,11 @@ var loadWorld = function(){
                  time2 = 0;
           };
           displayCurrentCityName('Republica Dominicana');
-         }
+          WorldTime(38.962, 35.241);
+         } 
+         plan[3].ongazeover = function(){}
 
-         plan[3].ongazeover = function(){
-           if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Republica Dominicana');
-             //this.material = reticle.get_random_hex_material();
-                 time2 = 0;
-          };
- 
-         }
-
-         plan[3].ongazeout = function(){
-            if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Republica Dominicana');
-             //this.material = reticle.get_random_hex_material();
-                 time2 = 0;
-          };
-     
-         }
+         plan[3].ongazeout = function(){}
 
           plan[4].ongazelong = function(){
             if (time2 < 4){time2++}
@@ -313,28 +252,11 @@ var loadWorld = function(){
                    time2 = 0;
           };
           displayCurrentCityName('New York');
-         }
+          WorldTime(40.712, -74.005);
+         } 
+         plan[4].ongazeover = function(){}
 
-         plan[4].ongazeover = function(){
-           if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'New York');
-            //this.material = reticle.get_random_hex_material();
-            time2 = 0;
-          };
-       
-
-         }
-
-         plan[4].ongazeout = function(){
-          if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'New York');
-            //this.material = reticle.get_random_hex_material();
-            time2 = 0;
-          };
-        
-         }
+         plan[4].ongazeout = function(){}
 
           plan[5].ongazelong = function(){
             if (time2 < 4){time2++}
@@ -347,28 +269,11 @@ var loadWorld = function(){
               time2 = 0;
           };
           displayCurrentCityName('Argentina');
-         }
+          WorldTime(40.41711, -3.70311);
+         } 
+         plan[5].ongazeover = function(){}
 
-         plan[5].ongazeover = function(){
-             if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Argentina');
-             //this.material = reticle.get_random_hex_material();
-              time2 = 0;
-          };
-         
-         }
-
-
-         plan[5].ongazeout = function(){
-               if (time2 < 4){time2++}
-            else if (time2 == 4){ 
-            socket.emit('lookat', 'Argentina');
-             //this.material = reticle.get_random_hex_material();
-              time2 = 0;
-          };
-      
-         }
+         plan[5].ongazeout = function(){}
 
     homecubes[0].ongazelong = function(){
             player.position.x = 0;
@@ -601,24 +506,7 @@ function applyWeatherConditions() {
     setTimeout(applyWeatherConditions, 5000);
 }
 
- // function displayCurrentCityName(name) {  // code snippet sacado del siguiente tutorial https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/
- //        scene.remove(currentCityTextMesh);
-
- //        currentCityText = new THREE.TextGeometry(name, {
- //          size: 4,
- //          height: 1
- //        });
- //        currentCityTextMesh = new THREE.Mesh(currentCityText, new THREE.MeshBasicMaterial({
- //          color: 0xffffff, opacity: 1
- //        }));
-
- //        currentCityTextMesh.position.y = 10;
- //        currentCityTextMesh.position.z = 20;
- //        currentCityTextMesh.rotation.x = 0;
- //        currentCityTextMesh.rotation.y = -180;
-
- //        scene.add(currentCityTextMesh);
- //      }
+ 
 
 function animation() {
   var elapsedSeconds = clock.getElapsedTime(),
@@ -734,7 +622,7 @@ function animation() {
         el.msRequestFullscreen();
       }
     }
- };
+ };//close LoadWorld();
 
  ///-------------------Añadiendo sol-------------------------//
 /*coordinates
@@ -757,17 +645,58 @@ function animation() {
   lat: 40.712, long: -74.005
   */  
 
-  function TheWorldTime(latitude, longitude){//
+  function WorldTime(latitude, longitude){//
 
-        var url = "http://api.timezonedb.com/v2/get-time-zone?key=D8RGXM6K480Q&format=json&by=position&lat="+latitude+"lng="+longitude+"&time=1467978270";
         $.ajax({
-            url: url,
-        }).done(function(response) {
-            d = new Date();
-            var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
-            nd = new Date(utc + (1000*response.gmtOffset));
-            alert("The time is " + nd.toLocaleString() + ".");
-                       
+            url: 'http://api.timezonedb.com/v2/get-time-zone',
+            data: {
+                key: 'NKYCAM8D0LEO',
+                format: 'json', 
+                by: 'position', 
+                lat: latitude, 
+                lng: longitude}, 
+        success: function(response) {
+            d = new Date(response.timestamp * 1000);
+           // var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+            var h = d.getHours() + 4; 
+            var m = d. getMinutes();
+            var s = d. getSeconds(); 
+
+            if(h >= 24) {h -= 24;}
+            nd = h + ':'+ m + ':' + s; 
+            console.log("The time is " + nd + ".");
+        
+        //-----------hours in sky ---------///
+
+                scene.remove(currentCityTextMesh2);
+
+                var textloader = new THREE.FontLoader();
+
+                textloader.load('font/texto.js', function (font){
+
+                currentCityText2 = new THREE.TextGeometry(nd, {
+                  size: 2,
+                  height: 1,
+                  curveSegments: 3,
+                  font: font
+                  // weight: 'normal',
+                  // bevelThickness: 3,
+                  // bevelSize: 3,
+                  // bevelEnabled: true
+                });
+                
+              currentCityTextMesh2 = new THREE.Mesh(currentCityText2, new THREE.MeshBasicMaterial({ color: 0xAA3939, opacity: 1}));
+
+                currentCityTextMesh2.position.y = 10;
+                currentCityTextMesh2.position.z = -10;
+               // currentCityTextMesh2.position.x = -10;
+                
+                currentCityTextMesh2.rotation.x = 0.1;
+                currentCityTextMesh2.rotation.y = 0;
+
+                scene.add(currentCityTextMesh2);
+                });     
+            }            
         });
     }
 
