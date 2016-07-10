@@ -15,7 +15,9 @@ var time2=0;
 var currentCityTextMesh; 
 var currentCityText;
 
-var ctrlx, ctrly, ctrlz;
+var ctrlx=0; 
+var ctrly=5;
+var ctrlz=0;
 
  // City and weather API set up code snippet from https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/ needs more adjustments
           cityWeather = {},
@@ -366,6 +368,54 @@ var loadWorld = function(){
           };
            displayCurrentCityName('Argentina');
          }
+
+    homecubes[0].ongazelong = function(){
+            player.position.x = 0;
+            player.position.z = 0;
+            updatePlayerData();
+        }
+    homecubes[0].ongazeover = function(){}
+    homecubes[0].ongazeout = function(){}
+
+    homecubes[1].ongazelong = function(){
+            player.position.x = 0;
+            player.position.z = 0;
+            updatePlayerData();
+        }
+    homecubes[1].ongazeover = function(){}
+    homecubes[1].ongazeout = function(){}
+
+    homecubes[2].ongazelong = function(){
+            player.position.x = 0;
+            player.position.z = 0;
+            updatePlayerData();
+        }
+    homecubes[2].ongazeover = function(){}
+    homecubes[2].ongazeout = function(){}
+
+    homecubes[3].ongazelong = function(){
+            player.position.x = 0;
+            player.position.z = 0;
+            updatePlayerData();
+    }
+    homecubes[3].ongazeover = function(){}
+    homecubes[3].ongazeout = function(){}
+
+    homecubes[4].ongazelong = function(){
+            player.position.x = 0;
+            player.position.z = 0;
+            updatePlayerData();
+        }
+    homecubes[4].ongazeover = function(){}
+    homecubes[4].ongazeout = function(){}
+
+    homecubes[5].ongazelong = function(){
+            player.position.x = 0;
+            player.position.z = 0;
+            updatePlayerData();
+        }
+    homecubes[5].ongazeover = function(){}
+    homecubes[5].ongazeout = function(){}
 
          // var planx = new THREE.Mesh( geo, new THREE.MeshBasicMaterial);
         for (var i = 0; i < 6; i++) {
@@ -1013,7 +1063,7 @@ var createPlayer = function(data){
     turnSpeed = data.turnSpeed;
 
     ctrlx = player.position.x;
-    ctrly = player.position.y;
+    ctrly = player.position.y + 5;
     ctrlz = player.position.z;
 
     updateCameraPosition();
