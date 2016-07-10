@@ -748,7 +748,23 @@ function TheWorldTime(latitude, longitude){//
 
 
 
-///---------------------------------------///
+
+
+
+///------------------------------------////
+
+function TheWorldWeather(latitude, longitude){
+
+       var url = "http://api.openweathermap.org/data/2.5/weather?q=London&APPID=d447b3f167725172e64ca9096871d7c5";
+        $.ajax({
+            url: url,
+        }).done(function(response) {
+           // nd = response.
+            alert("The weather in " + response.name + " is " +response.weather+ ".");
+                       
+        });
+}
+
 function displayCurrentCityName(name) {  // code snippet sacado del siguiente tutorial https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/
         scene.remove(currentCityTextMesh);
 
@@ -774,21 +790,6 @@ function displayCurrentCityName(name) {  // code snippet sacado del siguiente tu
         scene.add(currentCityTextMesh);
         });     
       }
-
-
-///------------------------------------////
-
-function TheWorldWeather(latitude, longitude){
-
-       var url = "http://api.openweathermap.org/data/2.5/weather?q=London&APPID=d447b3f167725172e64ca9096871d7c5";
-        $.ajax({
-            url: url,
-        }).done(function(response) {
-           // nd = response.
-            alert("The weather in " + response.name + " is " +response.weather+ ".");
-                       
-        });
-}
 
 /*
   function TheWorldTime(latitude, longitude){
