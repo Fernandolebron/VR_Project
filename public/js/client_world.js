@@ -442,37 +442,37 @@ var loadWorld = function(){
 
     reticle.add_collider(homecubes[0]);
     homecubes[0].position.x = 30;
-    homecubes[0].position.y = 5;
+    homecubes[0].position.y = 1;
     homecubes[0].position.z = 30;
     scene.add(homecubes[0]);
 
     reticle.add_collider(homecubes[1]);
     homecubes[1].position.x = -30;
-    homecubes[1].position.y = 5;
+    homecubes[1].position.y = 1;
     homecubes[1].position.z = -30;
     scene.add(homecubes[1]);
 
     reticle.add_collider(homecubes[2]);
     homecubes[2].position.x = 60;
-    homecubes[2].position.y = 5;
+    homecubes[2].position.y = 1;
     homecubes[2].position.z = 60;
     scene.add(homecubes[2]);
 
     reticle.add_collider(homecubes[3]);
     homecubes[3].position.x = -60;
-    homecubes[3].position.y = 5;
+    homecubes[3].position.y = 1;
     homecubes[3].position.z = -60;
     scene.add(homecubes[3]);
 
     reticle.add_collider(homecubes[4]);
     homecubes[4].position.x = 90;
-    homecubes[4].position.y = 5;
+    homecubes[4].position.y = 1;
     homecubes[4].position.z = -90;
     scene.add(homecubes[4]);
 
     reticle.add_collider(homecubes[5]);
     homecubes[5].position.x = -90;
-    homecubes[5].position.y = 5;
+    homecubes[5].position.y = 1;
     homecubes[5].position.z = 90;
     scene.add(homecubes[5]);
 
@@ -1106,7 +1106,7 @@ var updatePlayerData = function(){
     playerData.r_z = player.rotation.z;
 
     ctrlx = player.position.x;
-    ctrly = player.position.y;
+    ctrly = player.position.y + 5;
     ctrlz = player.position.z;
 
 };
