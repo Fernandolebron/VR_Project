@@ -61,6 +61,8 @@ var loadWorld = function(){
 
     initSky();
 
+     
+
     ///------------Añadiendo el piso--------------///
         var plane_geometry = new THREE.BoxGeometry( 400,400 );
         var plane_material = new THREE.MeshBasicMaterial( {color: 0xAA3939, side: THREE.DoubleSide} );
@@ -181,7 +183,7 @@ var loadWorld = function(){
                time2 = 0;
           };
              //this.material = reticle.get_random_hex_material();
-              displayCurrentCityName('Paris');
+             // displayCurrentCityName('Paris');
 
          }
 
@@ -192,7 +194,7 @@ var loadWorld = function(){
               time2 = 0;
           };
             // this.material = reticle.default_material();
-            
+            scene.remove(currentCityTextMesh);
          }
 
           plan[1].ongazelong = function(){
@@ -213,7 +215,7 @@ var loadWorld = function(){
                time2 = 0;
           };
              //this.material = reticle.get_random_hex_material();
-             displayCurrentCityName('Tokio');
+             ///displayCurrentCityName('Tokio');
          }
 
          plan[1].ongazeout = function(){
@@ -223,7 +225,7 @@ var loadWorld = function(){
               time2 = 0;
           };
             // this.material = reticle.default_material();
-         
+            scene.remove(currentCityTextMesh);
          }
 
          plan[2].ongazelong = function(){
@@ -244,7 +246,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                 time2 = 0;
           };
-          displayCurrentCityName('Turquia');
+          //displayCurrentCityName('Turquia');
          }
 
          plan[2].ongazeout = function(){
@@ -254,7 +256,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                 time2 = 0;
           };
-        
+            scene.remove(currentCityTextMesh);
          }
 
           plan[3].ongazelong = function(){
@@ -274,7 +276,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                  time2 = 0;
           };
-          displayCurrentCityName('Republica Dominicana');
+         // displayCurrentCityName('Republica Dominicana');
          }
 
          plan[3].ongazeout = function(){
@@ -285,7 +287,7 @@ var loadWorld = function(){
                  time2 = 0;
           };
           
-          
+          scene.remove(currentCityTextMesh);
          }
 
           plan[4].ongazelong = function(){
@@ -305,7 +307,7 @@ var loadWorld = function(){
             //this.material = reticle.get_random_hex_material();
             time2 = 0;
           };
-          displayCurrentCityName('New York');
+          //displayCurrentCityName('New York');
 
          }
 
@@ -317,7 +319,7 @@ var loadWorld = function(){
             time2 = 0;
           };
           
-          //scene.remove(currentCityTextMesh);
+          scene.remove(currentCityTextMesh);
 
          }
 
@@ -328,6 +330,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
               time2 = 0;
           };
+          displayCurrentCityName('Argentina');
          }
 
          plan[5].ongazeover = function(){
@@ -337,7 +340,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
               time2 = 0;
           };
-          displayCurrentCityName('Argentina');
+          
 
          }
 
@@ -349,7 +352,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
               time2 = 0;
           };
-           
+           scene.remove(currentCityTextMesh);
         
          }
 
@@ -419,7 +422,7 @@ var loadWorld = function(){
     *                  Code provided in class                *   
     *                                                        * 
     *********************************************************/
-    var clock;
+var clock;
 
 // Particles
 var particles = new THREE.Object3D(),
@@ -575,6 +578,8 @@ function animation() {
       }
     });
 
+      TheWorldTime(40.712, -74.005);
+
         // Request animation frame loop function
     var lastRender = 0;
     function animate(timestamp) {
@@ -677,19 +682,27 @@ function animation() {
   lat: 40.712, long: -74.005
   */  
 
-  function TheWorldTime(latitude, longitude){//
 
-        var url = "http://api.timezonedb.com/v2/get-time-zone?key=D8RGXM6K480Q&format=json&by=position&lat="+latitude+"lng="+longitude+"&time=1467978270";
+  
+
+};//close loadworld
+
+function TheWorldTime(latitude, longitude){//
+
+        var url = "http://api.timezonedb.com/v2/get-time-zone?key=NKYCAM8D0LEO&format=json&by=position&lat="+ latitude +"lng="+longitude+"&time=1467978270";
         $.ajax({
             url: url,
         }).done(function(response) {
             d = new Date();
             var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
             nd = new Date(utc + (1000*response.gmtOffset));
-            alert("The time is " + nd.toLocaleString() + ".");
+            
+            console.log("The time is " + nd.toLocaleString() + ".");
                        
         });
     }
+
+
 
 ///---------------------------------------///
 function displayCurrentCityName(name) {  // code snippet sacado del siguiente tutorial https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/
@@ -733,8 +746,6 @@ function TheWorldWeather(latitude, longitude){
         });
 }
 
-
-};//close loadworld
 /*
   function TheWorldTime(latitude, longitude){
 
