@@ -217,7 +217,7 @@ var loadWorld = function(){
           };
 
           displayCurrentCityName('Turquia');
-          WorldTime(35.689,139.691);
+          WorldTime(38.962, 35.241);
          } 
          plan[2].ongazeover = function(){}
 
@@ -234,7 +234,7 @@ var loadWorld = function(){
                  time2 = 0;
           };
           displayCurrentCityName('Republica Dominicana');
-          WorldTime(38.962, 35.241);
+          WorldTime(18.500, -69.988);
          } 
          plan[3].ongazeover = function(){}
 
