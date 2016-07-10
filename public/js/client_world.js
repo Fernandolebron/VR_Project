@@ -128,12 +128,12 @@ var loadWorld = function(){
         Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/ny/5.jpg')} ));
         Mat5.push(new THREE.MeshBasicMaterial( { map: load.load('images/ny/6.jpg')} ));
 
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres/londres.png')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres/londres.png')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres/londres.png')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londres/londres.png')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londes/londres.png')} ));
-        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/londes/londres.png')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/1.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/2.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/3.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/4.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/5.jpg')} ));
+        Mat6.push(new THREE.MeshBasicMaterial( { map: load.load('images/argentina/6.jpg')} ));
         
 
         GoBack.push(new THREE.MeshBasicMaterial( { map: load.load('images/menu/home.png')} ));
