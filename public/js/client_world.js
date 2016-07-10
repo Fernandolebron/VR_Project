@@ -187,7 +187,7 @@ var loadWorld = function(){
                time2 = 0;
           };
              //this.material = reticle.get_random_hex_material();
-              displayCurrentCityName('Paris');
+         
          }
 
          plan[0].ongazeout = function(){
@@ -197,7 +197,7 @@ var loadWorld = function(){
               time2 = 0;
           };
             // this.material = reticle.default_material();
-             displayCurrentCityName('Paris');
+      
          }
 
           plan[1].ongazelong = function(){
@@ -221,7 +221,7 @@ var loadWorld = function(){
                time2 = 0;
           };
              //this.material = reticle.get_random_hex_material();
-             displayCurrentCityName('Tokio');
+       
          }
 
          plan[1].ongazeout = function(){
@@ -231,7 +231,7 @@ var loadWorld = function(){
               time2 = 0;
           };
             // this.material = reticle.default_material();
-            displayCurrentCityName('Tokio');
+         
          }
 
          plan[2].ongazelong = function(){
@@ -255,7 +255,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                 time2 = 0;
           };
-          displayCurrentCityName('Turquia');
+        
          }
 
          plan[2].ongazeout = function(){
@@ -265,7 +265,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                 time2 = 0;
           };
-          displayCurrentCityName('Turquia');
+    
          }
 
           plan[3].ongazelong = function(){
@@ -288,7 +288,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                  time2 = 0;
           };
-          displayCurrentCityName('Republica Dominicana');
+ 
          }
 
          plan[3].ongazeout = function(){
@@ -298,7 +298,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                  time2 = 0;
           };
-          displayCurrentCityName('Republica Dominicana');
+     
          }
 
           plan[4].ongazelong = function(){
@@ -322,7 +322,7 @@ var loadWorld = function(){
             //this.material = reticle.get_random_hex_material();
             time2 = 0;
           };
-          displayCurrentCityName('New York');
+       
 
          }
 
@@ -333,7 +333,7 @@ var loadWorld = function(){
             //this.material = reticle.get_random_hex_material();
             time2 = 0;
           };
-          displayCurrentCityName('New York');
+        
          }
 
           plan[5].ongazelong = function(){
@@ -346,6 +346,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
               time2 = 0;
           };
+          displayCurrentCityName('Argentina');
          }
 
          plan[5].ongazeover = function(){
@@ -355,7 +356,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
               time2 = 0;
           };
-          displayCurrentCityName('Argentina');
+         
          }
 
 
@@ -366,7 +367,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
               time2 = 0;
           };
-           displayCurrentCityName('Argentina');
+      
          }
 
     homecubes[0].ongazelong = function(){
