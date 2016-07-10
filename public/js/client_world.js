@@ -20,12 +20,12 @@ var ctrly=5;
 var ctrlz=0;
 
  // City and weather API set up code snippet from https://www.sitepoint.com/bringing-vr-to-web-google-cardboard-three-js/ needs more adjustments
-          cityWeather = {},
-          cityTimes = [],
-          currentCity = 0,
-          currentCityText = new THREE.TextGeometry(),
-          currentCityTextMesh = new THREE.Mesh();
-          cities = ['Paris', 'London', 'Tokio', 'New York', 'Santo Domingo', 'Turkey'];
+         //  cityWeather = {},
+         //  cityTimes = [],
+         //  currentCity = 0,
+         //  //currentCityText = new THREE.TextGeometry(),
+         // // currentCityTextMesh = new THREE.Mesh();
+         //  cities = ['Paris', 'London', 'Tokio', 'New York', 'Santo Domingo', 'Turkey'];
 
 var loadWorld = function(){
 
@@ -187,7 +187,7 @@ var loadWorld = function(){
                time2 = 0;
           };
              //this.material = reticle.get_random_hex_material();
-         
+              
          }
 
          plan[0].ongazeout = function(){
@@ -197,7 +197,7 @@ var loadWorld = function(){
               time2 = 0;
           };
             // this.material = reticle.default_material();
-      
+             
          }
 
           plan[1].ongazelong = function(){
@@ -221,7 +221,7 @@ var loadWorld = function(){
                time2 = 0;
           };
              //this.material = reticle.get_random_hex_material();
-       
+             
          }
 
          plan[1].ongazeout = function(){
@@ -230,8 +230,7 @@ var loadWorld = function(){
             socket.emit('lookat', 'Tokio');
               time2 = 0;
           };
-            // this.material = reticle.default_material();
-         
+            
          }
 
          plan[2].ongazelong = function(){
@@ -255,7 +254,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                 time2 = 0;
           };
-        
+          
          }
 
          plan[2].ongazeout = function(){
@@ -264,8 +263,7 @@ var loadWorld = function(){
             socket.emit('lookat', 'Turquia');
              //this.material = reticle.get_random_hex_material();
                 time2 = 0;
-          };
-    
+          
          }
 
           plan[3].ongazelong = function(){
@@ -288,7 +286,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                  time2 = 0;
           };
- 
+          
          }
 
          plan[3].ongazeout = function(){
@@ -298,7 +296,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
                  time2 = 0;
           };
-     
+          
          }
 
           plan[4].ongazelong = function(){
@@ -322,7 +320,7 @@ var loadWorld = function(){
             //this.material = reticle.get_random_hex_material();
             time2 = 0;
           };
-       
+          
 
          }
 
@@ -333,7 +331,7 @@ var loadWorld = function(){
             //this.material = reticle.get_random_hex_material();
             time2 = 0;
           };
-        
+          
          }
 
           plan[5].ongazelong = function(){
@@ -346,6 +344,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
               time2 = 0;
           };
+
           displayCurrentCityName('Argentina');
          }
 
@@ -356,7 +355,7 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
               time2 = 0;
           };
-         
+          
          }
 
 
@@ -367,13 +366,14 @@ var loadWorld = function(){
              //this.material = reticle.get_random_hex_material();
               time2 = 0;
           };
-      
+           
          }
 
     homecubes[0].ongazelong = function(){
             player.position.x = 0;
             player.position.z = 0;
             updatePlayerData();
+            displayCurrentCityName('Paris');
         }
     homecubes[0].ongazeover = function(){}
     homecubes[0].ongazeout = function(){}
@@ -382,6 +382,7 @@ var loadWorld = function(){
             player.position.x = 0;
             player.position.z = 0;
             updatePlayerData();
+            displayCurrentCityName('Tokio');
         }
     homecubes[1].ongazeover = function(){}
     homecubes[1].ongazeout = function(){}
@@ -390,6 +391,7 @@ var loadWorld = function(){
             player.position.x = 0;
             player.position.z = 0;
             updatePlayerData();
+            displayCurrentCityName('Turquia');
         }
     homecubes[2].ongazeover = function(){}
     homecubes[2].ongazeout = function(){}
@@ -398,6 +400,7 @@ var loadWorld = function(){
             player.position.x = 0;
             player.position.z = 0;
             updatePlayerData();
+            displayCurrentCityName('Republica Dominicana');
     }
     homecubes[3].ongazeover = function(){}
     homecubes[3].ongazeout = function(){}
@@ -406,6 +409,7 @@ var loadWorld = function(){
             player.position.x = 0;
             player.position.z = 0;
             updatePlayerData();
+            displayCurrentCityName('New York');
         }
     homecubes[4].ongazeover = function(){}
     homecubes[4].ongazeout = function(){}
@@ -414,6 +418,7 @@ var loadWorld = function(){
             player.position.x = 0;
             player.position.z = 0;
             updatePlayerData();
+            displayCurrentCityName('Argentina');
         }
     homecubes[5].ongazeover = function(){}
     homecubes[5].ongazeout = function(){}
@@ -443,37 +448,37 @@ var loadWorld = function(){
 
     reticle.add_collider(homecubes[0]);
     homecubes[0].position.x = 30;
-    homecubes[0].position.y = 1;
+    homecubes[0].position.y = 5;
     homecubes[0].position.z = 30;
     scene.add(homecubes[0]);
 
     reticle.add_collider(homecubes[1]);
     homecubes[1].position.x = -30;
-    homecubes[1].position.y = 1;
+    homecubes[1].position.y = 5;
     homecubes[1].position.z = -30;
     scene.add(homecubes[1]);
 
     reticle.add_collider(homecubes[2]);
     homecubes[2].position.x = 60;
-    homecubes[2].position.y = 1;
+    homecubes[2].position.y = 5;
     homecubes[2].position.z = 60;
     scene.add(homecubes[2]);
 
     reticle.add_collider(homecubes[3]);
     homecubes[3].position.x = -60;
-    homecubes[3].position.y = 1;
+    homecubes[3].position.y = 5;
     homecubes[3].position.z = -60;
     scene.add(homecubes[3]);
 
     reticle.add_collider(homecubes[4]);
     homecubes[4].position.x = 90;
-    homecubes[4].position.y = 1;
+    homecubes[4].position.y = 5;
     homecubes[4].position.z = -90;
     scene.add(homecubes[4]);
 
     reticle.add_collider(homecubes[5]);
     homecubes[5].position.x = -90;
-    homecubes[5].position.y = 1;
+    homecubes[5].position.y = 5;
     homecubes[5].position.z = 90;
     scene.add(homecubes[5]);
 
@@ -1107,7 +1112,7 @@ var updatePlayerData = function(){
     playerData.r_z = player.rotation.z;
 
     ctrlx = player.position.x;
-    ctrly = player.position.y + 5;
+    ctrly = player.position.y;
     ctrlz = player.position.z;
 
 };
