@@ -98,9 +98,17 @@ var loadWorld = function(){
   plane.position.y= -2;
   scene.add( plane );
 
-  //Events------------------------------------------
+  
+  document.addEventListener('click', onMouseClick, false );
+  document.addEventListener('mousedown', onMouseDown, false);
+  document.addEventListener('mouseup', onMouseUp, false);
+  document.addEventListener('mousemove', onMouseMove, false);
+  document.addEventListener('mouseout', onMouseOut, false);
   document.addEventListener('keydown', onKeyDown, false );
   document.addEventListener('keyup', onKeyUp, false );
+  document.addEventListener('keyz', onKeyZ, false );
+  document.addEventListener('keyx', onKeyX, false );
+  document.addEventListener('keyc', onKeyC, false );  
 
 
   function initSky() {
@@ -608,21 +616,71 @@ var loadWorld = function(){
       requestAnimationFrame(animate);
     }
 
-  function onKeyDown( event ){
+  ///------------------------------------------------------//
 
-      //event = event || window.event;
+///-----------------------Other functions-------------------///
+   function onMouseClick(){
+        intersects = calculateIntersects( event );
 
-      keyState[event.keyCode || event.which] = true;
+        if ( intersects.length > 0 ){
+            //If object is intersected by mouse pointer, do something
+            if (intersects[0].object == sphere){
+                alert("This is a sphere!");
+            }
+        }
+    }
+    function onMouseDown(){
 
-  }
+    }
+    function onMouseUp(){
 
-  function onKeyUp( event ){
+    }
+    function onMouseMove(){
 
-      //event = event || window.event;
+    }
+    function onMouseOut(){
 
-      keyState[event.keyCode || event.which] = false;
+    }
+    function onKeyDown( event ){
 
-  }
+        //event = event || window.event;
+
+        keyState[event.keyCode || event.which] = true;
+
+    }
+
+    function onKeyUp( event ){
+
+        //event = event || window.event;
+
+        keyState[event.keyCode || event.which] = false;
+
+    }
+
+    function onKeyZ( event ){
+
+        //event = event || window.event;
+        
+         keyState[event.keyCode || event.which] = true;
+    
+    }
+
+    function onKeyX( event ){
+
+        //event = event || window.event;
+
+         keyState[event.keyCode || event.which] = false;
+
+    }
+
+    function onKeyC( event ){
+
+        //event = event || window.event;
+
+         keyState[event.keyCode || event.which] = true;
+
+    }
+
 
   function onResize() {
     console.log('Resizing to %s x %s.', window.innerWidth, window.innerHeight);
