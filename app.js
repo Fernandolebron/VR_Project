@@ -62,7 +62,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('lookat', function(cube){
-        console.log('Estas Mirando al cubo ' + cube);
+        console.log('Estas mirando al cubo ' + cube);
     });
 
 });
