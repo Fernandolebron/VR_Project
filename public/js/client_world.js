@@ -1,8 +1,3 @@
-//--------------------------------------------------------------//
-//---------------------- GLOBAL VARIABLES ----------------------//
-//--------------------------------------------------------------//
-
-// Display Elements------------------
 var container, raycaster, objects = [];
 var renderer, scene, camera, controls, effect;
 var zoom = 0;
@@ -43,28 +38,13 @@ var particles = new THREE.Object3D(),
   currentWeather = 'Clear';
 
 var particleTexture, spriteMaterial;
-  //weather
 
-/*
-London 51.507351, -0.127758
-Paris 48.856614, 2.352222
-Tokyo 35.6895, 139.6917
-Turkey 38.963745, 35.243322
-NYC 40.712784, -74.005941
-SD 18.7357, -70.1627
-
-white 0xEBECEC
-Blue 0x1E82D6
-Gray 0x929495
-*/
 
 
 // Works as the main() in client_world.
 var loadWorld = function(){
 
-  //----------------------------------------------------------//
-  //---------------------- INITIALIZING ----------------------//
-  //----------------------------------------------------------//
+
 
   //Scene Elements------------------
   // Setup three.js WebGL renderer. Note: Antialiasing is a big performance hit.
